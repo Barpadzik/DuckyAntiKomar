@@ -4,7 +4,7 @@ Our resource is an advanced anti-cheat plugin designed to detect and prevent unf
 # ⚠️ Important Info
 This plugin is still in testing. This plugin need Java 21 to run. 
 
-1.18.2 > 1.19.4 > 1.20.4 On our Guardly Community Discord!
+1.18.2 > 1.19.4 > 1.20.4 On our [Guardly Community Discord](https://discord.gg/guardly)!
 
 ## 🔧 **Features**
 **Elytra Speed Checks** 🚀
@@ -41,7 +41,7 @@ antikomar.bypass – Allows a player to bypass all checks, making them immune to
 anitkomar.reload - Allows player to reload plugin in game via /antinuker reload
 
 ## 📞 Support & Issues
-If you have any questions, bug reports, or feature requests, feel free to join our Discord server for support!
+If you have any questions, bug reports, or feature requests, feel free to join our [Discord server](https://discord.gg/guardly) for support!
 
 ### 📜 License
 This plugin is licensed under the GNU General Public License v3.0 (GPLv3), meaning it is open-source and can be freely modified and redistributed under the same license.
