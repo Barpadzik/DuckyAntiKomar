@@ -1,0 +1,42 @@
+# ===============================
+#        AntiKomar - Config
+# ===============================
+
+# Time (in seconds), after which alerts for a given player will be reset
+alert-timeout: 300
+
+# ===============================
+#           KomarA
+# ===============================
+Max-KomarA-Alerts: 5
+KomarA-Command: "ban %player% AntiKomarSystem [KomarA]"
+
+# ===============================
+#           KomarB
+# ===============================
+Max-KomarB-Alerts: 15
+KomarB-Command: "ban %player% AntiKomarSystem [KomarB]"
+
+# ===============================
+#           KomarC
+# ===============================
+Max-KomarC-Alerts: 5
+KomarC-Command: "ban %player% AntiKomarSystem [KomarC]"
+
+# ===============================
+#   Elytra maximum speeds
+# ===============================
+elytra-speeds:
+above-max-speed-gliding: 285.0
+above-max-speed-boost: 200.0
+above-max-speed-pitch-52: 300.0
+above-max-speed-pitch-90: 400.0
+# ===============================
+#           Permissions
+# ===============================
+permissions:
+  alerts: "antikomar.alerts"
+  bypass: "antikomar.bypass"
+  reload: "anitkomar.reload"
+# Please note that the permissions section is for information purposes only.
+# Changing this will not change the permissions in the plugin!
