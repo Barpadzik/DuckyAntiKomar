@@ -298,7 +298,6 @@ public class MetricsLite {
             }
         }
 
-        /** Checks that the class was properly relocated. */
         private void checkRelocation() {
             if (System.getProperty("bstats.relocatecheck") == null
                     || !System.getProperty("bstats.relocatecheck").equals("false")) {
