@@ -28,6 +28,10 @@ Notifies admins about detected rule violations.
 Alerts are sent in both chat and console.
 Auto-clears alerts after 5 minutes.
 
+**Discord WebHook** 🪝
+
+Discord Webhook Integration > All alerts on your Discord!
+
 ## ⚙️ **Configuration**
 All settings, such as maximum allowed speed and firework hit delay, can be adjusted in config.yml.
 
@@ -65,8 +69,9 @@ KomarA-Command: "ban %player% AntiKomarSystem [KomarA]"
 # ===============================
 #           KomarB
 # ===============================
-Max-KomarB-Alerts: 15
+Max-KomarB-Alerts: 10
 KomarB-Command: "ban %player% AntiKomarSystem [KomarB]"
+KomarB-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
 #           KomarC
@@ -78,10 +83,26 @@ KomarC-Command: "ban %player% AntiKomarSystem [KomarC]"
 #   Elytra maximum speeds
 # ===============================
 elytra-speeds:
-above-max-speed-gliding: 285.0
-above-max-speed-boost: 200.0
-above-max-speed-pitch-52: 300.0
-above-max-speed-pitch-90: 400.0
+above-max-speed-gliding: 282.6
+above-max-speed-boost: 128.6
+above-max-speed-pitch-10: 240.0
+above-max-speed-pitch-50: 200.0
+above-max-speed-pitch-54: 242.3
+above-max-speed-pitch-87: 282.4
+above-max-speed-pitch-90: 282.6
+above-max-speed-pitch-92: 300.0
+above-max-speed-pitch-100: 320.0
+
+# ===============================
+#        Discord WebHook
+# ===============================
+discord:
+  enabled: false  # Enable webhooks?
+  discord-webhook-url: "https://discord.com/api/webhooks/..."  # Your Webhook URL (insert valid webhook URL here)
+  username: "DuckyAntiKomar"  # Username displayed in webhook
+  avatar-url: "https://example.com/avatar.png"  # Avatar URL (optional)
+  message-template: "**AntiKomarSystem**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**" # Message template, %player%, %check%, %vl% are replaced dynamically
+
 # ===============================
 #           Permissions
 # ===============================
