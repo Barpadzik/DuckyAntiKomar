@@ -1,9 +1,10 @@
-package pl.barpad.duckyantikomar;
+package pl.barpad.duckyantikomar.main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import pl.barpad.duckyantikomar.Main;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.Map;
 public class ViolationAlerts {
 
     private final Main plugin;
+    private final DiscordHook discordHook;
     private final HashMap<String, Integer> violations = new HashMap<>();
     private final HashMap<String, Long> lastViolationTime = new HashMap<>();
     private FileConfiguration messagesConfig;
@@ -23,8 +25,9 @@ public class ViolationAlerts {
     private String komarBCommand;
     private String komarCCommand;
 
-    public ViolationAlerts(Main plugin) {
+    public ViolationAlerts(Main plugin, DiscordHook discordHook) {
         this.plugin = plugin;
+        this.discordHook = discordHook;
         loadMessagesConfig();
         loadConfig();
         startCleanupTask();
@@ -70,6 +73,7 @@ public class ViolationAlerts {
                 .replace("%vl%", String.valueOf(count));
 
         Bukkit.getConsoleSender().sendMessage(message);
+        discordHook.sendViolationAlert(playerName, checkType, count);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("antikomar.alerts")) {
@@ -80,6 +84,7 @@ public class ViolationAlerts {
         if (checkType.equalsIgnoreCase("KomarA") && count > maxKomarAAlerts) {
             executePunishment(playerName, komarACommand);
         }
+
     }
 
     public void executePunishment(String playerName, String command) {

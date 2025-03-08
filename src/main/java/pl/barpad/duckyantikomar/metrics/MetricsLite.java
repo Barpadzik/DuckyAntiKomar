@@ -1,4 +1,4 @@
-package pl.barpad.duckyantikomar;
+package pl.barpad.duckyantikomar.metrics;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

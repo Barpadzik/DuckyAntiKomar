@@ -1,4 +1,4 @@
-package pl.barpad.duckyantikomar;
+package pl.barpad.duckyantikomar.main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -22,29 +22,29 @@ public abstract class AbstractCommand implements CommandExecutor, TabExecutor {
     protected final String permMessage;
     protected static CommandMap cmap;
 
-    public AbstractCommand(String command) {
-        this(command, null, null, null, null);
-    }
+//    public AbstractCommand(String command) {
+//        this(command, null, null, null, null);
+//    }
 
-    public AbstractCommand(String command, String usage) {
-        this(command, usage, null, null, null);
-    }
+//    public AbstractCommand(String command, String usage) {
+//        this(command, usage, null, null, null);
+//    }
 
-    public AbstractCommand(String command, String usage, String description) {
-        this(command, usage, description, null, null);
-    }
+//    public AbstractCommand(String command, String usage, String description) {
+//        this(command, usage, description, null, null);
+//    }
 
     public AbstractCommand(String command, String usage, String description, String permissionMessage) {
         this(command, usage, description, permissionMessage, null);
     }
 
-    public AbstractCommand(String command, String usage, String description, List<String> aliases) {
-        this(command, usage, description, null, aliases);
-    }
+//    public AbstractCommand(String command, String usage, String description, List<String> aliases) {
+//        this(command, usage, description, null, aliases);
+//    }
 
-    public AbstractCommand(String command, List<String> aliases) {
-        this(command, null, null, null, aliases);
-    }
+//    public AbstractCommand(String command, List<String> aliases) {
+//        this(command, null, null, null, aliases);
+//    }
 
     public AbstractCommand(String command, String usage, String description, String permissionMessage, List<String> aliases) {
         this.command = command.toLowerCase();

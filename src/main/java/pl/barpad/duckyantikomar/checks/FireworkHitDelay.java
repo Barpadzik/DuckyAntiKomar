@@ -1,4 +1,4 @@
-package pl.barpad.duckyantikomar;
+package pl.barpad.duckyantikomar.checks;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -8,6 +8,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+import pl.barpad.duckyantikomar.Main;
+import pl.barpad.duckyantikomar.main.ViolationAlerts;
 
 import java.util.HashMap;
 import java.util.UUID;

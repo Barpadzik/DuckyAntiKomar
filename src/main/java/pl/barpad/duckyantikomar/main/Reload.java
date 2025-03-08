@@ -1,10 +1,11 @@
-package pl.barpad.duckyantikomar;
+package pl.barpad.duckyantikomar.main;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
+import pl.barpad.duckyantikomar.Main;
 
 import java.io.File;
 import java.util.Collections;

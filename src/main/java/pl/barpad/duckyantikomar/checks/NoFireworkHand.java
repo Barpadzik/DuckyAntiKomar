@@ -1,4 +1,4 @@
-package pl.barpad.duckyantikomar;
+package pl.barpad.duckyantikomar.checks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import pl.barpad.duckyantikomar.Main;
+import pl.barpad.duckyantikomar.main.ViolationAlerts;
 
 public class NoFireworkHand implements Listener {
 
