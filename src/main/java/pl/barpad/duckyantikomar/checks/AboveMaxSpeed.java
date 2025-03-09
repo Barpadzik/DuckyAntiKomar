@@ -60,7 +60,7 @@ public class AboveMaxSpeed implements Listener {
         double maxAllowedSpeed = getMaxAllowedSpeed(pitch, player);
 
         if (debugMode) {
-            Bukkit.getLogger().info(String.format("[AntiKomar Debug] %s - Speed: %.2f km/h, Pitch: %.2f, MaxAllowed: %.2f km/h",
+            Bukkit.getLogger().info(String.format("[DuckyAntiKomar] (KomarB Debug) %s - Speed: %.2f km/h, Pitch: %.2f, MaxAllowed: %.2f km/h",
                     player.getName(), speed, pitch, maxAllowedSpeed));
         }
 
@@ -70,13 +70,13 @@ public class AboveMaxSpeed implements Listener {
             int violationCount = violationAlerts.getViolationCount(player.getName(), "KomarB");
 
             if (debugMode) {
-                Bukkit.getLogger().warning(String.format("[AntiKomar Alert] %s exceeded max speed! (%.2f km/h > %.2f km/h) | Violations: %d",
+                Bukkit.getLogger().warning(String.format("[DuckyAntiKomar] (KomarB Debug) %s exceeded max speed! (%.2f km/h > %.2f km/h) | Violations: %d",
                         player.getName(), speed, maxAllowedSpeed, violationCount));
             }
 
             if (violationCount > maxKomarBAlerts) {
                 if (debugMode) {
-                    Bukkit.getLogger().warning(String.format("[AntiKomar Punishment] Executing punishment for %s: %s",
+                    Bukkit.getLogger().warning(String.format("[DuckyAntiKomar] (KomarB Debug) Executing punishment for %s: %s",
                             player.getName(), komarBCommand.replace("%player%", player.getName())));
                 }
                 violationAlerts.executePunishment(player.getName(), komarBCommand);
