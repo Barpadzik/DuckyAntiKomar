@@ -17,6 +17,7 @@ public class NoFireworkHand implements Listener {
     private final ViolationAlerts violationAlerts;
     private final int maxKomarCAlerts;
     private final String komarCCommand;
+    private final boolean debugMode;
 
     public NoFireworkHand(Main plugin, ViolationAlerts violationAlerts) {
         this.violationAlerts = violationAlerts;
@@ -24,6 +25,7 @@ public class NoFireworkHand implements Listener {
         FileConfiguration config = plugin.getConfig();
         this.maxKomarCAlerts = config.getInt("Max-KomarC-Alerts", 5);
         this.komarCCommand = config.getString("KomarC-Command", "ban %player% AntiKomarSystem [KomarC]");
+        this.debugMode = config.getBoolean("KomarC-Debug-Mode", false);
 
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
@@ -41,8 +43,20 @@ public class NoFireworkHand implements Listener {
             event.setCancelled(false);
             violationAlerts.reportViolation(player.getName(), "KomarC");
 
-            if (violationAlerts.getViolationCount(player.getName(), "KomarC") > maxKomarCAlerts) {
+            int violationCount = violationAlerts.getViolationCount(player.getName(), "KomarC");
+
+            if (debugMode) {
+                Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) Player: " + player.getName());
+                Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) Equipment Slot: " + event.getHand());
+                Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) Violation Count: " + violationCount + " / " + maxKomarCAlerts);
+            }
+
+            if (violationCount > maxKomarCAlerts) {
                 violationAlerts.executePunishment(player.getName(), komarCCommand);
+
+                if (debugMode) {
+                    Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) Executed punishment: " + komarCCommand.replace("%player%", player.getName()));
+                }
             }
         }
     }

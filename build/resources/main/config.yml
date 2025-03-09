@@ -10,6 +10,7 @@ alert-timeout: 300
 # ===============================
 Max-KomarA-Alerts: 5
 KomarA-Command: "ban %player% AntiKomarSystem [KomarA]"
+KomarA-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
 #           KomarB
@@ -23,6 +24,7 @@ KomarB-Debug-Mode: false # Caution! This is only for devs only! This will spam y
 # ===============================
 Max-KomarC-Alerts: 5
 KomarC-Command: "ban %player% AntiKomarSystem [KomarC]"
+KomarC-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
 #   Elytra maximum speeds
