@@ -17,17 +17,27 @@ import java.util.UUID;
 
 public class FireworkHitDelay implements Listener {
 
+    private final Main plugin;
     private final ViolationAlerts violationAlerts;
     private final HashMap<UUID, Long> fireworkUsageTimes = new HashMap<>();
-    private final int maxFireworkDelay;
-    private final boolean debugMode;
+    private volatile int maxFireworkDelay;
+    private volatile boolean debugMode;
 
     public FireworkHitDelay(Main plugin, ViolationAlerts violationAlerts) {
+        this.plugin = plugin;
         this.violationAlerts = violationAlerts;
-        FileConfiguration config = plugin.getConfig();
-        this.maxFireworkDelay = config.getInt("max-firework-delay", 100);
-        this.debugMode = config.getBoolean("KomarA-Debug-Mode", false);
+        reloadConfig();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
+    public void reloadConfig() {
+        FileConfiguration config = plugin.getConfig();
+        this.maxFireworkDelay = config.getInt("Max-Firework-Delay", 100);
+        this.debugMode = config.getBoolean("KomarA-Debug-Mode", false);
+
+        if (debugMode) {
+            Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Reloaded config: maxFireworkDelay = " + maxFireworkDelay);
+        }
     }
 
     @EventHandler
