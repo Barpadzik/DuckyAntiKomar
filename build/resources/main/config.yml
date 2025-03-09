@@ -28,7 +28,7 @@ KomarC-Command: "ban %player% AntiKomarSystem [KomarC]"
 KomarC-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
-#   Elytra maximum speeds
+# Elytra maximum speeds [KomarB]
 # ===============================
 elytra-speeds:
 above-max-speed-gliding: 282.6
