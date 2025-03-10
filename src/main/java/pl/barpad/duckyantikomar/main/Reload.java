@@ -18,7 +18,7 @@ public class Reload extends AbstractCommand {
     private File messagesFile;
 
     public Reload(Main plugin) {
-        super("antikomar", "Przeładowanie Pluginu", "/antikomar reload", "§f§l≫ §cNieznana Komenda");
+        super("antikomar", "Plugin Reload", "/antikomar reload", "§f§l≫ §cUnknown Command");
         this.plugin = plugin;
         this.register();
         loadMessages();
