@@ -51,7 +51,7 @@ discord:
   enabled: false  # Enable webhooks?
   discord-webhook-url: "https://discord.com/api/webhooks/..."  # Your Webhook URL (insert valid webhook URL here)
   username: "DuckyAntiKomar"  # Username displayed in webhook
-  avatar-url: "https://example.com/avatar.png"  # Avatar URL (optional)
+  avatar-url: "https://i.imgur.com/wPfoYdI.png"  # Avatar URL (optional)
   message-template: "**AntiKomarSystem**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**" # Message template, %player%, %check%, %vl% are replaced dynamically
 
 # ===============================
