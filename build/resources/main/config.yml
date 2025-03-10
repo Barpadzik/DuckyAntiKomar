@@ -8,6 +8,7 @@ alert-timeout: 300
 # ===============================
 #           KomarA
 # ===============================
+KomarA-Enable: true
 Max-Firework-Delay: 100 # Max-Firework-Delay specifies the maximum time (in milliseconds) that can elapse between using a firework while flying an elytra and hitting another player.
 Max-KomarA-Alerts: 5
 KomarA-Command: "ban %player% AntiKomarSystem [KomarA]"
@@ -16,6 +17,7 @@ KomarA-Debug-Mode: false # Caution! This is only for devs only! This will spam y
 # ===============================
 #           KomarB
 # ===============================
+KomarB-Enable: true
 Max-KomarB-Alerts: 10
 KomarB-Command: "ban %player% AntiKomarSystem [KomarB]"
 KomarB-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
@@ -23,6 +25,7 @@ KomarB-Debug-Mode: false # Caution! This is only for devs only! This will spam y
 # ===============================
 #           KomarC
 # ===============================
+KomarC-Enable: true
 Max-KomarC-Alerts: 5
 KomarC-Command: "ban %player% AntiKomarSystem [KomarC]"
 KomarC-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!

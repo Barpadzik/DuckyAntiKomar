@@ -22,6 +22,7 @@ public class FireworkHitDelay implements Listener {
     private final HashMap<UUID, Long> fireworkUsageTimes = new HashMap<>();
     private volatile int maxFireworkDelay;
     private volatile boolean debugMode;
+    private volatile boolean enabled;
 
     public FireworkHitDelay(Main plugin, ViolationAlerts violationAlerts) {
         this.plugin = plugin;
@@ -32,16 +33,19 @@ public class FireworkHitDelay implements Listener {
 
     public void reloadConfig() {
         FileConfiguration config = plugin.getConfig();
+        this.enabled = config.getBoolean("KomarA-Enable", true);
         this.maxFireworkDelay = config.getInt("Max-Firework-Delay", 100);
         this.debugMode = config.getBoolean("KomarA-Debug-Mode", false);
 
         if (debugMode) {
-            Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Reloaded config: maxFireworkDelay = " + maxFireworkDelay);
+            Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Reloaded config: enabled = " + enabled + ", maxFireworkDelay = " + maxFireworkDelay);
         }
     }
 
     @EventHandler
     public void onFireworkUse(PlayerInteractEvent event) {
+        if (!enabled) return;
+
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
 
@@ -58,6 +62,8 @@ public class FireworkHitDelay implements Listener {
 
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent event) {
+        if (!enabled) return;
+
         if (!(event.getDamager() instanceof Player damager) || !(event.getEntity() instanceof Player victim)) {
             return;
         }

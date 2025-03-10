@@ -18,11 +18,13 @@ public class NoFireworkHand implements Listener {
     private final int maxKomarCAlerts;
     private final String komarCCommand;
     private final boolean debugMode;
+    private final boolean enabled;
 
     public NoFireworkHand(Main plugin, ViolationAlerts violationAlerts) {
         this.violationAlerts = violationAlerts;
 
         FileConfiguration config = plugin.getConfig();
+        this.enabled = config.getBoolean("KomarC-Enable", true);
         this.maxKomarCAlerts = config.getInt("Max-KomarC-Alerts", 5);
         this.komarCCommand = config.getString("KomarC-Command", "ban %player% AntiKomarSystem [KomarC]");
         this.debugMode = config.getBoolean("KomarC-Debug-Mode", false);
@@ -32,6 +34,8 @@ public class NoFireworkHand implements Listener {
 
     @EventHandler
     public void onFireworkUse(PlayerInteractEvent event) {
+        if (!enabled) return;
+
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
 

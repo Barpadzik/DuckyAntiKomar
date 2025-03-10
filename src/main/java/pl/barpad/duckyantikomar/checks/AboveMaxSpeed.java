@@ -26,6 +26,7 @@ public class AboveMaxSpeed implements Listener {
     private int maxKomarBAlerts;
     private String komarBCommand;
     private boolean debugMode;
+    private boolean komarBEnabled;
 
     public AboveMaxSpeed(Main plugin, ViolationAlerts violationAlerts) {
         this.plugin = plugin;
@@ -47,10 +48,18 @@ public class AboveMaxSpeed implements Listener {
         maxKomarBAlerts = plugin.getConfig().getInt("Max-KomarB-Alerts", 10);
         komarBCommand = plugin.getConfig().getString("KomarB-Command", "ban %player% AntiKomarSystem [KomarB]");
         debugMode = plugin.getConfig().getBoolean("KomarB-Debug-Mode", false);
+        komarBEnabled = plugin.getConfig().getBoolean("KomarB-Enable", true);
     }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
+        if (!komarBEnabled) {
+            if (debugMode) {
+                Bukkit.getLogger().info("[DuckyAntiKomar] (KomarB Debug) Check is disabled in config.yml.");
+            }
+            return;
+        }
+
         Player player = event.getPlayer();
         if (!player.isGliding()) return;
 
