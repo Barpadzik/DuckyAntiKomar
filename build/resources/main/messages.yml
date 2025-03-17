@@ -3,3 +3,6 @@ no-permission: '§6§lANTIKOMAR §8» &cYou don''t have permission!'
 config-reloaded: '§6§lANTIKOMAR §8» &aConfiguration reloaded.'
 plugin-reloaded: '§6§lANTIKOMAR §8» &aPlugin successfully reloaded.'
 incorrect-usage: '§6§lANTIKOMAR §8» &cUsage: /antikomar reload'
+update-available: "§6§lANTIKOMAR §8» &eA new version is available: &c%version%"
+update-download: "§6§lANTIKOMAR §8» &eDownload: &a%url%"
+update-check-failed: "§6§lANTIKOMAR §8» &cCould not check for updates."

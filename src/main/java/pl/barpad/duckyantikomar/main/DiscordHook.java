@@ -30,7 +30,7 @@ public class DiscordHook {
         discordEnabled = config.getBoolean("discord.enabled", false);
         webhookUrl = config.getString("discord.discord-webhook-url", "");
         username = config.getString("discord.username", "DuckyAntiKomar");
-        avatarUrl = config.getString("discord.avatar-url", "https://example.com/avatar.png");
+        avatarUrl = config.getString("discord.avatar-url", "https://i.imgur.com/wPfoYdI.png");
         messageTemplate = config.getString("discord.message-template", "**AntiKomarSystem!**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**");
     }
 

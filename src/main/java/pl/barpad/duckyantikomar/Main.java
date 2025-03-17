@@ -2,12 +2,13 @@ package pl.barpad.duckyantikomar;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
-import pl.barpad.duckyantikomar.checks.AboveMaxSpeed;
-import pl.barpad.duckyantikomar.checks.NoFireworkHand;
+// import pl.barpad.duckyantikomar.checks.AboveMaxSpeed;
+// import pl.barpad.duckyantikomar.checks.NoFireworkHand;
 import pl.barpad.duckyantikomar.main.DiscordHook;
 import pl.barpad.duckyantikomar.main.Reload;
+import pl.barpad.duckyantikomar.main.UpdateChecker;
 import pl.barpad.duckyantikomar.main.ViolationAlerts;
-import pl.barpad.duckyantikomar.metrics.MetricsLite;;
+import pl.barpad.duckyantikomar.metrics.MetricsLite;
 
 public final class Main extends JavaPlugin {
 
@@ -22,10 +23,11 @@ public final class Main extends JavaPlugin {
         MetricsLite metricsLite = new MetricsLite(this, serviceId);
         discordHook = new DiscordHook(this);
         violationAlerts = new ViolationAlerts(this, discordHook);
-        new NoFireworkHand(this, violationAlerts);
-        new AboveMaxSpeed(this, violationAlerts);
+        //new NoFireworkHand(this, violationAlerts);
+        //new AboveMaxSpeed(this, violationAlerts);
         new FireworkHitDelay(this, violationAlerts);
         new Reload(this);
+        new UpdateChecker(this).checkForUpdates();
     }
 
     @Override

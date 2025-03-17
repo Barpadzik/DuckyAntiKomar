@@ -68,7 +68,7 @@ public abstract class AbstractCommand implements CommandExecutor, TabExecutor {
         if (this.permMessage != null) {
             cmd.setPermissionMessage(this.permMessage);
         }
-        cmd.setPermission("antikomar." + this.command);
+        cmd.setPermission("antikomar.reload");
         this.getCommandMap().register("", cmd);
         cmd.setExecutor(this);
 

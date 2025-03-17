@@ -17,16 +17,16 @@ KomarA-Debug-Mode: false # Caution! This is only for devs only! This will spam y
 # ===============================
 #           KomarB
 # ===============================
-KomarB-Enable: true
-Max-KomarB-Alerts: 10
+KomarB-Enable: false # This check need rewrite, and it's disabled from code [Can't enable it]
+Max-KomarB-Alerts: 999
 KomarB-Command: "ban %player% AntiKomarSystem [KomarB]"
 KomarB-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
 #           KomarC
 # ===============================
-KomarC-Enable: true
-Max-KomarC-Alerts: 5
+KomarC-Enable: false # This check need rewrite, and it's disabled from code [Can't enable it]
+Max-KomarC-Alerts: 999
 KomarC-Command: "ban %player% AntiKomarSystem [KomarC]"
 KomarC-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
