@@ -26,9 +26,22 @@ KomarB-Debug-Mode: false # Caution! This is only for devs only! This will spam y
 #           KomarC
 # ===============================
 KomarC-Enable: false # This check need rewrite, and it's disabled from code [Can't enable it]
-Max-KomarC-Alerts: 999
+KomarC-Pending-Violations: 2
+Max-KomarC-Alerts: 5
 KomarC-Command: "ban %player% AntiKomarSystem [KomarC]"
 KomarC-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
+
+# ===============================
+#           KomarD
+# ===============================
+KomarD-Enable: true
+KomarD-CriticalHitsRequired: 3
+KomarD-Timeframe: 300 # Time (in milliseconds) within which critical hits must occur
+Max-KomarD-Alerts: 5
+KomarD-Command: "ban %player% AntiKomarSystem [KomarD]"
+KomarD-Debug-Mode: false  # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
+
+
 
 # ===============================
 # Elytra maximum speeds [KomarB]

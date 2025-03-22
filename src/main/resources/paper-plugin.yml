@@ -1,7 +1,14 @@
 name: DuckyAntiKomar
-version: '1.7.3'
+version: '1.8'
 main: pl.barpad.duckyantikomar.Main
 api-version: '1.20.6'
 load: STARTUP
 authors: [ Barpad ]
 description: Plugin designed to catch Elytra Cheaters
+Plugin:
+  join-classpath: true
+dependencies:
+  server:
+    packetevents:
+      load: "BEFORE"
+      required: true

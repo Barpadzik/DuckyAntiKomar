@@ -42,7 +42,7 @@ public class Reload extends AbstractCommand {
     }
 
     private String getMessage(String key) {
-        return messagesConfig.getString(key, "§c[AntiKomar] Missing message: " + key).replace("&", "§");
+        return messagesConfig.getString(key, "§c[DuckyAntiKomar] Missing message: " + key).replace("&", "§");
     }
 
     @Override

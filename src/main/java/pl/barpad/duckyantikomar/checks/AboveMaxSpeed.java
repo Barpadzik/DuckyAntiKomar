@@ -48,7 +48,7 @@ public class AboveMaxSpeed implements Listener {
         maxKomarBAlerts = plugin.getConfig().getInt("Max-KomarB-Alerts", 10);
         komarBCommand = plugin.getConfig().getString("KomarB-Command", "ban %player% AntiKomarSystem [KomarB]");
         debugMode = plugin.getConfig().getBoolean("KomarB-Debug-Mode", false);
-        komarBEnabled = plugin.getConfig().getBoolean("KomarB-Enable", true);
+        komarBEnabled = plugin.getConfig().getBoolean("KomarB-Enable", false);
     }
 
     @EventHandler
