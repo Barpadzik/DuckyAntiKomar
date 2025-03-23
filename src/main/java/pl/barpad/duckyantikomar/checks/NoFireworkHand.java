@@ -60,13 +60,13 @@ public class NoFireworkHand extends PacketListenerAbstract {
         boolean hadFireworkInMainHand = mainHand.getType() == Material.FIREWORK_ROCKET;
         boolean hadFireworkInOffHand = offHand.getType() == Material.FIREWORK_ROCKET;
 
+        if (!hadFireworkInMainHand && !hadFireworkInOffHand) return;
+
         if (debugMode) {
             Bukkit.getLogger().info("[DuckyAntiKomar] Debug: " + player.getName() +
                     " used a firework! MainHand: " + mainHand.getType() +
                     " (Slot " + player.getInventory().getHeldItemSlot() + "), OffHand: " + offHand.getType());
         }
-
-        if (!hadFireworkInMainHand && !hadFireworkInOffHand) return;
 
         int mainHandAmount = hadFireworkInMainHand ? mainHand.getAmount() : 0;
         int offHandAmount = hadFireworkInOffHand ? offHand.getAmount() : 0;
