@@ -4,7 +4,7 @@ Our resource is an advanced anti-cheat plugin designed to detect and prevent unf
 # ⚠️ Important Info
 This plugin is still in testing. This plugin need Java 21 to run.
 
-Plugin Versions for 1.18 and obove can be downloaded on our [Guardly Community Discord](https://discord.gg/guardly)!
+Plugin Versions for 1.18 and obove can be downloaded on our Guardly Community Discord
 
 ## 🔧 **Features**
 **Firework Hit Delay** 🎆
@@ -12,15 +12,14 @@ Plugin Versions for 1.18 and obove can be downloaded on our [Guardly Community D
 Monitors firework usage during elytra flight.
 Prevents players from attacking immediately after boosting with fireworks.
 
-**Elytra Speed Checks** 🚀 [Soon]
+**Elytra Criticals** 🗡️ [Soon - In 1.8]
+
+Detects critical hits that are dealt impossible quickly after using fireworks
+
+**Elytra Speed Checks** 🚀 [Soon - In 2.0]
 
 Detects players exceeding configured speed limits based on flight angles.
 Prevents unfair speed boosts using fireworks.
-
-**Firework Use Spoof** 🎒 [Soon]
-
-Monitors firework usage during elytra flight.
-Prevents players from using firework from inventory or without holding it.
 
 **Violation Alerts** ⚠️
 
