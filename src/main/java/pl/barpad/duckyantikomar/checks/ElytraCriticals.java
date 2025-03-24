@@ -35,12 +35,12 @@ public class ElytraCriticals implements Listener {
 
     private void loadConfig() {
         FileConfiguration config = plugin.getConfig();
-        enabled = config.getBoolean("KomarD-Enable", true);
-        maxAlerts = config.getInt("Max-KomarD-Alerts", 5);
-        punishmentCommand = config.getString("KomarD-Command", "ban %player% AntiKomarSystem [KomarD]");
-        debugMode = config.getBoolean("KomarD-Debug-Mode", false);
-        criticalHitsRequired = config.getInt("KomarD-CriticalHitsRequired", 3);
-        timeframe = config.getLong("KomarD-Timeframe", 300);
+        enabled = config.getBoolean("KomarC-Enable", true);
+        maxAlerts = config.getInt("Max-KomarC-Alerts", 5);
+        punishmentCommand = config.getString("KomarC-Command", "ban %player% AntiKomarSystem [KomarD]");
+        debugMode = config.getBoolean("KomarC-Debug-Mode", false);
+        criticalHitsRequired = config.getInt("KomarC-CriticalHitsRequired", 3);
+        timeframe = config.getLong("KomarC-Timeframe", 300);
     }
 
     @EventHandler
@@ -63,7 +63,7 @@ public class ElytraCriticals implements Listener {
                 lastHitTime.put(playerName, currentTime);
 
                 if (debugMode) {
-                    Bukkit.getLogger().info("[DuckyAntiKomar] (KomarD Debug) " + playerName + " landed a critical hit while gliding. (" + playerCriticalHits.get(playerName) + "/" + criticalHitsRequired + ")");
+                    Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) " + playerName + " landed a critical hit while gliding. (" + playerCriticalHits.get(playerName) + "/" + criticalHitsRequired + ")");
                 }
             } else {
                 playerCriticalHits.put(playerName, 0);
@@ -73,19 +73,19 @@ public class ElytraCriticals implements Listener {
                 pendingViolations.put(playerName, pendingViolations.getOrDefault(playerName, 0) + 1);
 
                 if (pendingViolations.get(playerName) >= 2) {
-                    violationAlerts.reportViolation(playerName, "KomarD");
-                    int vl = violationAlerts.getViolationCount(playerName, "KomarD");
+                    violationAlerts.reportViolation(playerName, "KomarC");
+                    int vl = violationAlerts.getViolationCount(playerName, "KomarC");
 
                     if (debugMode) {
-                        Bukkit.getLogger().info("[DuckyAntiKomar] (KomarD Debug) " + playerName + " triggered violation after 2 reports (VL: " + vl + ")");
+                        Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) " + playerName + " triggered violation after 2 reports (VL: " + vl + ")");
                     }
 
                     if (vl >= maxAlerts) {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), punishmentCommand.replace("%player%", playerName));
-                        violationAlerts.executePunishment(playerName, "KomarD");
+                        violationAlerts.executePunishment(playerName, "KomarC");
 
                         if (debugMode) {
-                            Bukkit.getLogger().info("[DuckyAntiKomar] (KomarD Debug) Penalty executed for " + playerName);
+                            Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) Penalty executed for " + playerName);
                         }
                     }
 

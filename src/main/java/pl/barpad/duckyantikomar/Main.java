@@ -3,9 +3,9 @@ package pl.barpad.duckyantikomar;
 import com.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.barpad.duckyantikomar.checks.AboveMaxSpeed;
 import pl.barpad.duckyantikomar.checks.ElytraCriticals;
 import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
-import pl.barpad.duckyantikomar.checks.NoFireworkHand;
 import pl.barpad.duckyantikomar.main.DiscordHook;
 import pl.barpad.duckyantikomar.main.Reload;
 import pl.barpad.duckyantikomar.main.UpdateChecker;
@@ -36,10 +36,9 @@ public final class Main extends JavaPlugin {
         discordHook = new DiscordHook(this);
         violationAlerts = new ViolationAlerts(this, discordHook);
 
-        PacketEvents.getAPI().getEventManager().registerListener(new NoFireworkHand(this, violationAlerts));
-
         new FireworkHitDelay(this, violationAlerts);
         new ElytraCriticals(this, violationAlerts);
+//      new AboveMaxSpeed(this, violationAlerts); - Disabled [This will be recoded in 2.0]
         new Reload(this);
         new UpdateChecker(this).checkForUpdates();
 

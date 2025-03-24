@@ -16,7 +16,7 @@ repositories {
     }
     maven {
         name = "codemc-releases"
-        url = "https://repo.codemc.io/repository/maven-releases"
+        url = "https://repo.codemc.io/repository/maven-release"
     }
 }
 
