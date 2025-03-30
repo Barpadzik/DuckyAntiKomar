@@ -8,5 +8,5 @@ dependencies:
   server:
     packetevents:
       load: "BEFORE"
-      required: true
-      join-classpath: true
+      required: false
+      join-classpath: false

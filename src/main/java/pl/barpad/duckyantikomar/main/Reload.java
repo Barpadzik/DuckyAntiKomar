@@ -57,8 +57,6 @@ public class Reload extends AbstractCommand {
             reloadMessages();
 
             sender.sendMessage(getMessage("config-reloaded"));
-            plugin.getServer().getPluginManager().disablePlugin(plugin);
-            plugin.getServer().getPluginManager().enablePlugin(plugin);
             sender.sendMessage(getMessage("plugin-reloaded"));
             return true;
         }

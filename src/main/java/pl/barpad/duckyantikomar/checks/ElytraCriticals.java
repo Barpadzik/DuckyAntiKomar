@@ -39,8 +39,8 @@ public class ElytraCriticals implements Listener {
         maxAlerts = config.getInt("Max-KomarC-Alerts", 5);
         punishmentCommand = config.getString("KomarC-Command", "ban %player% AntiKomarSystem [KomarD]");
         debugMode = config.getBoolean("KomarC-Debug-Mode", false);
-        criticalHitsRequired = config.getInt("KomarC-CriticalHitsRequired", 3);
-        timeframe = config.getLong("KomarC-Timeframe", 300);
+        criticalHitsRequired = config.getInt("KomarC-CriticalHitsRequired", 2);
+        timeframe = config.getLong("KomarC-Timeframe", 500);
     }
 
     @EventHandler
@@ -82,7 +82,7 @@ public class ElytraCriticals implements Listener {
 
                     if (vl >= maxAlerts) {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), punishmentCommand.replace("%player%", playerName));
-                        violationAlerts.executePunishment(playerName, "KomarC");
+                        violationAlerts.executePunishment(playerName, "KomarC", punishmentCommand);
 
                         if (debugMode) {
                             Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) Penalty executed for " + playerName);

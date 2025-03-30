@@ -1,8 +1,9 @@
 package pl.barpad.duckyantikomar;
 
-import com.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
+//import com.github.retrooper.packetevents.PacketEvents;
+//import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.barpad.duckyantikomar.animations.AnimationsManager;
 import pl.barpad.duckyantikomar.checks.AboveMaxSpeed;
 import pl.barpad.duckyantikomar.checks.ElytraCriticals;
 import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
@@ -19,8 +20,8 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
-        PacketEvents.getAPI().load();
+        //PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
+        //PacketEvents.getAPI().load();
     }
 
     @Override
@@ -28,19 +29,21 @@ public final class Main extends JavaPlugin {
         getLogger().info("DuckyAntiKomar Enabled | Author: Barpad");
         saveDefaultConfig();
 
-        PacketEvents.getAPI().init();
+        //PacketEvents.getAPI().init();
 
         int serviceId = 24978;
         MetricsLite metricsLite = new MetricsLite(this, serviceId);
 
+        AnimationsManager animationsManager = new AnimationsManager(this);
         discordHook = new DiscordHook(this);
-        violationAlerts = new ViolationAlerts(this, discordHook);
+        violationAlerts = new ViolationAlerts(this, discordHook, animationsManager);
 
         new FireworkHitDelay(this, violationAlerts);
         new ElytraCriticals(this, violationAlerts);
 //      new AboveMaxSpeed(this, violationAlerts); - Disabled [This will be recoded in 2.0]
         new Reload(this);
         new UpdateChecker(this).checkForUpdates();
+        new AnimationsManager(this);
 
         getLogger().info("DuckyAntiKomar has been successfully enabled!");
     }
@@ -48,6 +51,6 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("DuckyAntiKomar Disabled | Author: Barpad");
-        PacketEvents.getAPI().terminate();
+        //PacketEvents.getAPI().terminate();
     }
 }

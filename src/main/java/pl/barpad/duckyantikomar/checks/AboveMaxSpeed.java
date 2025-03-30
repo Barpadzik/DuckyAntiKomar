@@ -88,7 +88,7 @@ public class AboveMaxSpeed implements Listener {
                     Bukkit.getLogger().warning(String.format("[DuckyAntiKomar] (KomarB Debug) Executing punishment for %s: %s",
                             player.getName(), komarBCommand.replace("%player%", player.getName())));
                 }
-                violationAlerts.executePunishment(player.getName(), komarBCommand);
+                violationAlerts.executePunishment(player.getName(), komarBCommand, komarBCommand);
             }
         }
     }

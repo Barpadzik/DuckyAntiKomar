@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import pl.barpad.duckyantikomar.Main;
+import pl.barpad.duckyantikomar.animations.AnimationsManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class ViolationAlerts {
 
     private final Main plugin;
     private final DiscordHook discordHook;
+    private final AnimationsManager animationsManager;
     private final HashMap<String, Integer> violations = new HashMap<>();
     private final HashMap<String, Long> lastViolationTime = new HashMap<>();
     private FileConfiguration messagesConfig;
@@ -25,9 +27,10 @@ public class ViolationAlerts {
     private String komarBCommand;
     private String komarCCommand;
 
-    public ViolationAlerts(Main plugin, DiscordHook discordHook) {
+    public ViolationAlerts(Main plugin, DiscordHook discordHook, AnimationsManager animationsManager) {
         this.plugin = plugin;
         this.discordHook = discordHook;
+        this.animationsManager = animationsManager;
         loadMessagesConfig();
         loadConfig();
         startCleanupTask();
@@ -81,17 +84,36 @@ public class ViolationAlerts {
             }
         }
 
-        if (checkType.equalsIgnoreCase("KomarA") && count > maxKomarAAlerts) {
-            executePunishment(playerName, komarACommand);
+        if (checkType.equalsIgnoreCase("KomarA") && count >= maxKomarAAlerts) {
+            executePunishment(playerName, checkType, komarACommand);
         }
-
     }
 
-    public void executePunishment(String playerName, String command) {
-        String formattedCommand = command.replace("%player%", playerName);
-        Bukkit.getScheduler().runTask(plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), formattedCommand));
-        violations.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
-        lastViolationTime.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
+    public void executePunishment(String playerName, String check, String command) {
+        Player player = Bukkit.getPlayer(playerName);
+        if (player == null) {
+            return;
+        }
+
+        if (animationsManager.isAnimationEnabled(check)) {
+            try {
+                animationsManager.playAnimation(player, check);
+
+                Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", playerName));
+                    violations.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
+                    lastViolationTime.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
+                }, 100L);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", playerName));
+                violations.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
+                lastViolationTime.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
+            });
+        }
     }
 
     public int getViolationCount(String playerName, String checkType) {

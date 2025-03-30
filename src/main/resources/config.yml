@@ -8,10 +8,12 @@ alert-timeout: 300
 # ===============================
 #           KomarA
 # ===============================
-KomarA-Enable: true
+KomarA-Enable: true # Should check be turned on?
 Max-Firework-Delay: 100 # Max-Firework-Delay specifies the maximum time (in milliseconds) that can elapse between using a firework while flying an elytra and hitting another player.
-Max-KomarA-Alerts: 5
+Max-KomarA-Alerts: 5 # Maximum number of demerits, after that the command below will be called
 KomarA-Command: "ban %player% AntiKomarSystem [KomarA]"
+KomarA-Animation-Enable: false # Should animation be turned on?
+KomarA-Animation-Type: NONE # ANIMATIONS: EXPLOSION | SCARY | THUNDERBOLT | GUARDIANS | RANDOM | NONE
 KomarA-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
@@ -20,33 +22,21 @@ KomarA-Debug-Mode: false # Caution! This is only for devs only! This will spam y
 KomarB-Enable: false # This check need rewrite, and it's disabled from code [Can't enable it]
 Max-KomarB-Alerts: 999
 KomarB-Command: "ban %player% AntiKomarSystem [KomarB]"
+KomarB-Animation-Enable: false
+KomarB-Animation-Type: NONE
 KomarB-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
 #           KomarC
 # ===============================
 KomarC-Enable: true
-KomarC-CriticalHitsRequired: 3
-KomarC-Timeframe: 300 # Time (in milliseconds) within which critical hits must occur
+KomarC-CriticalHitsRequired: 2
+KomarC-Timeframe: 500 # Time (in milliseconds) within which critical hits must occur
 Max-KomarC-Alerts: 5
-KomarC-Command: "ban %player% AntiKomarSystem [KomarD]"
+KomarC-Command: "ban %player% AntiKomarSystem [KomarC]"
+KomarC-Animation-Enable: false
+KomarC-Animation-Type: NONE
 KomarC-Debug-Mode: false  # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
-
-
-
-# ===============================
-# Elytra maximum speeds [KomarB]
-# ===============================
-elytra-speeds:
-above-max-speed-gliding: 282.6
-above-max-speed-boost: 128.6
-above-max-speed-pitch-10: 240.0
-above-max-speed-pitch-50: 200.0
-above-max-speed-pitch-54: 242.3
-above-max-speed-pitch-87: 282.4
-above-max-speed-pitch-90: 282.6
-above-max-speed-pitch-92: 300.0
-above-max-speed-pitch-100: 320.0
 
 # ===============================
 #        Discord WebHook
