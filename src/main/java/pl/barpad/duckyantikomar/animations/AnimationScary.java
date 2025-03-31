@@ -59,7 +59,7 @@ public class AnimationScary {
                         Particle.SOUL,
                         currentLoc.getX(), currentLoc.getY(), currentLoc.getZ(),
                         15,
-                        0.1, 0.1, 0.1,
+                        0.5, 0.5, 0.5,
                         0.1
                 );
 
