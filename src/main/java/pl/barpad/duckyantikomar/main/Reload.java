@@ -55,6 +55,7 @@ public class Reload extends AbstractCommand {
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             plugin.reloadConfig();
             reloadMessages();
+            plugin.loadConfig();
 
             sender.sendMessage(getMessage("config-reloaded"));
             sender.sendMessage(getMessage("plugin-reloaded"));

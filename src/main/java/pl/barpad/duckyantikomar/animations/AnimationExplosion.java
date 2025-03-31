@@ -36,7 +36,7 @@ public class AnimationExplosion {
                         Particle.EXPLOSION,
                         currentLoc.getX(), currentLoc.getY(), currentLoc.getZ(),
                         10,
-                        0.2, 0.2, 0.2,
+                        0.5, 0.5, 0.5,
                         0.1
                 );
 
