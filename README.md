@@ -12,7 +12,7 @@ Plugin Versions for 1.18 and obove can be downloaded on our Guardly Community Di
 Monitors firework usage during elytra flight.
 Prevents players from attacking immediately after boosting with fireworks.
 
-**Elytra Criticals** 🗡️ [Soon - In 1.8]
+**Elytra Criticals** 🗡️
 
 Detects critical hits that are dealt impossible quickly after using fireworks
 
@@ -62,41 +62,35 @@ alert-timeout: 300
 # ===============================
 #           KomarA
 # ===============================
-KomarA-Enable: true
+KomarA-Enable: true # Should check be turned on?
 Max-Firework-Delay: 100 # Max-Firework-Delay specifies the maximum time (in milliseconds) that can elapse between using a firework while flying an elytra and hitting another player.
-Max-KomarA-Alerts: 5
+Max-KomarA-Alerts: 5 # Maximum number of demerits, after that the command below will be called
 KomarA-Command: "ban %player% AntiKomarSystem [KomarA]"
+KomarA-Animation-Enable: false # Should animation be turned on?
+KomarA-Animation-Type: NONE # ANIMATIONS: EXPLOSION | SCARY | THUNDERBOLT | GUARDIANS | RANDOM | NONE
 KomarA-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
-#           KomarB
+# KomarB [DISABLED! WORK IN PROGRESS]
 # ===============================
 KomarB-Enable: false # This check need rewrite, and it's disabled from code [Can't enable it]
 Max-KomarB-Alerts: 999
 KomarB-Command: "ban %player% AntiKomarSystem [KomarB]"
+KomarB-Animation-Enable: false
+KomarB-Animation-Type: NONE
 KomarB-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
 #           KomarC
 # ===============================
-KomarC-Enable: false # This check need rewrite, and it's disabled from code [Can't enable it]
-Max-KomarC-Alerts: 999
+KomarC-Enable: true
+KomarC-CriticalHitsRequired: 2
+KomarC-Timeframe: 500 # Time (in milliseconds) within which critical hits must occur
+Max-KomarC-Alerts: 5
 KomarC-Command: "ban %player% AntiKomarSystem [KomarC]"
-KomarC-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
-
-# ===============================
-# Elytra maximum speeds [KomarB]
-# ===============================
-elytra-speeds:
-above-max-speed-gliding: 282.6
-above-max-speed-boost: 128.6
-above-max-speed-pitch-10: 240.0
-above-max-speed-pitch-50: 200.0
-above-max-speed-pitch-54: 242.3
-above-max-speed-pitch-87: 282.4
-above-max-speed-pitch-90: 282.6
-above-max-speed-pitch-92: 300.0
-above-max-speed-pitch-100: 320.0
+KomarC-Animation-Enable: false
+KomarC-Animation-Type: NONE
+KomarC-Debug-Mode: false  # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
 #        Discord WebHook
@@ -130,5 +124,4 @@ incorrect-usage: '§6§lANTIKOMAR §8» &cUsage: /antikomar reload'
 update-available: "§6§lANTIKOMAR §8» &eA new version is available: &c%version%"
 update-download: "§6§lANTIKOMAR §8» &eDownload: &a%url%"
 update-check-failed: "§6§lANTIKOMAR §8» &cCould not check for updates."
-
 ```
