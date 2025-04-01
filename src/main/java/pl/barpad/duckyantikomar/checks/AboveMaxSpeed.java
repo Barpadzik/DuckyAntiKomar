@@ -35,7 +35,7 @@ public class AboveMaxSpeed implements Listener {
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
-    private void loadConfig() {
+    public void loadConfig() {
         maxSpeedGliding = plugin.getConfig().getDouble("above-max-speed-gliding", 282.6);
         maxSpeedBoost = plugin.getConfig().getDouble("above-max-speed-boost", 128.6);
         maxSpeedPitch10 = plugin.getConfig().getDouble("above-max-speed-pitch-10", 240.0);

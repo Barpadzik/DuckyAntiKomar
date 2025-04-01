@@ -6,6 +6,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 import pl.barpad.duckyantikomar.Main;
+import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
+import pl.barpad.duckyantikomar.checks.ElytraCriticals;
+import pl.barpad.duckyantikomar.checks.AboveMaxSpeed;
 
 import java.io.File;
 import java.util.Collections;
@@ -16,10 +19,16 @@ public class Reload extends AbstractCommand {
     private final Main plugin;
     private FileConfiguration messagesConfig;
     private File messagesFile;
+    private final FireworkHitDelay fireworkHitDelay;
+    private final ElytraCriticals elytraCriticals;
+    private final AboveMaxSpeed aboveMaxSpeed;
 
-    public Reload(Main plugin) {
+    public Reload(Main plugin, FireworkHitDelay fireworkHitDelay, ElytraCriticals elytraCriticals, AboveMaxSpeed aboveMaxSpeed) {
         super("antikomar", "Plugin Reload", "/antikomar reload", "§f§l≫ §cUnknown Command");
         this.plugin = plugin;
+        this.fireworkHitDelay = fireworkHitDelay;
+        this.elytraCriticals = elytraCriticals;
+        this.aboveMaxSpeed = aboveMaxSpeed;
         this.register();
         loadMessages();
     }
@@ -55,7 +64,6 @@ public class Reload extends AbstractCommand {
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             plugin.reloadConfig();
             reloadMessages();
-            plugin.loadConfig();
 
             sender.sendMessage(getMessage("config-reloaded"));
             sender.sendMessage(getMessage("plugin-reloaded"));

@@ -27,11 +27,11 @@ public class FireworkHitDelay implements Listener {
     public FireworkHitDelay(Main plugin, ViolationAlerts violationAlerts) {
         this.plugin = plugin;
         this.violationAlerts = violationAlerts;
-        reloadConfig();
+        loadConfig();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    public void reloadConfig() {
+    public void loadConfig() {
         FileConfiguration config = plugin.getConfig();
         this.enabled = config.getBoolean("KomarA-Enable", true);
         this.maxFireworkDelay = config.getInt("Max-Firework-Delay", 100);

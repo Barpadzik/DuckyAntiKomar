@@ -2,6 +2,7 @@ package pl.barpad.duckyantikomar;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.barpad.duckyantikomar.animations.AnimationsManager;
+import pl.barpad.duckyantikomar.checks.AboveMaxSpeed;
 import pl.barpad.duckyantikomar.checks.ElytraCriticals;
 import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
 import pl.barpad.duckyantikomar.main.DiscordHook;
@@ -9,8 +10,6 @@ import pl.barpad.duckyantikomar.main.Reload;
 import pl.barpad.duckyantikomar.main.UpdateChecker;
 import pl.barpad.duckyantikomar.main.ViolationAlerts;
 import pl.barpad.duckyantikomar.metrics.MetricsLite;
-
-import java.io.File;
 
 public final class Main extends JavaPlugin {
 
@@ -21,7 +20,6 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         getLogger().info("DuckyAntiKomar Enabled | Author: Barpad");
         saveDefaultConfig();
-        loadConfig();
 
         int serviceId = 24978;
         MetricsLite metricsLite = new MetricsLite(this, serviceId);
@@ -30,9 +28,11 @@ public final class Main extends JavaPlugin {
         discordHook = new DiscordHook(this);
         violationAlerts = new ViolationAlerts(this, discordHook, animationsManager);
 
-        new FireworkHitDelay(this, violationAlerts);
-        new ElytraCriticals(this, violationAlerts);
-        new Reload(this);
+        FireworkHitDelay fireworkHitDelay = new FireworkHitDelay(this, violationAlerts);
+        ElytraCriticals elytraCriticals = new ElytraCriticals(this, violationAlerts);
+        AboveMaxSpeed aboveMaxSpeed = new AboveMaxSpeed(this, violationAlerts);
+
+        new Reload(this, fireworkHitDelay, elytraCriticals, aboveMaxSpeed);
         new UpdateChecker(this).checkForUpdates();
 
         getLogger().info("DuckyAntiKomar has been successfully enabled!");
@@ -41,13 +41,5 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("DuckyAntiKomar Disabled | Author: Barpad");
-    }
-
-    public void loadConfig() {
-        File configFile = new File(getDataFolder(), "config.yml");
-
-        if (!configFile.exists()) {
-            saveResource("config.yml", false);
-        }
     }
 }

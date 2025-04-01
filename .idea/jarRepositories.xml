@@ -41,5 +41,10 @@
       <option name="name" value="codemc-releases" />
       <option name="url" value="https://repo.codemc.io/repository/maven-release" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://storehouse.okaeri.eu/repository/maven-public/" />
+    </remote-repository>
   </component>
 </project>

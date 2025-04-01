@@ -33,7 +33,7 @@ public class ElytraCriticals implements Listener {
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
-    private void loadConfig() {
+    public void loadConfig() {
         FileConfiguration config = plugin.getConfig();
         enabled = config.getBoolean("KomarC-Enable", true);
         maxAlerts = config.getInt("Max-KomarC-Alerts", 5);
