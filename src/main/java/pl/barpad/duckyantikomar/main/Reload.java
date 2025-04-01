@@ -21,14 +21,12 @@ public class Reload extends AbstractCommand {
     private File messagesFile;
     private final FireworkHitDelay fireworkHitDelay;
     private final ElytraCriticals elytraCriticals;
-    private final AboveMaxSpeed aboveMaxSpeed;
 
-    public Reload(Main plugin, FireworkHitDelay fireworkHitDelay, ElytraCriticals elytraCriticals, AboveMaxSpeed aboveMaxSpeed) {
+    public Reload(Main plugin, FireworkHitDelay fireworkHitDelay, ElytraCriticals elytraCriticals) {
         super("antikomar", "Plugin Reload", "/antikomar reload", "§f§l≫ §cUnknown Command");
         this.plugin = plugin;
         this.fireworkHitDelay = fireworkHitDelay;
         this.elytraCriticals = elytraCriticals;
-        this.aboveMaxSpeed = aboveMaxSpeed;
         this.register();
         loadMessages();
     }

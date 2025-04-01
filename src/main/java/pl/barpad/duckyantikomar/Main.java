@@ -30,9 +30,9 @@ public final class Main extends JavaPlugin {
 
         FireworkHitDelay fireworkHitDelay = new FireworkHitDelay(this, violationAlerts);
         ElytraCriticals elytraCriticals = new ElytraCriticals(this, violationAlerts);
-        AboveMaxSpeed aboveMaxSpeed = new AboveMaxSpeed(this, violationAlerts);
+        // AboveMaxSpeed aboveMaxSpeed = new AboveMaxSpeed(this, violationAlerts);
 
-        new Reload(this, fireworkHitDelay, elytraCriticals, aboveMaxSpeed);
+        new Reload(this, fireworkHitDelay, elytraCriticals);
         new UpdateChecker(this).checkForUpdates();
 
         getLogger().info("DuckyAntiKomar has been successfully enabled!");
