@@ -20,7 +20,6 @@ public class AnimationsManager {
     private final Random random;
 
     private final Map<UUID, Long> animationCooldowns = new HashMap<>();
-    private final long ANIMATION_COOLDOWN_MILLIS = 10 * 1000;
 
     public AnimationsManager(Main plugin) {
         this.plugin = plugin;
@@ -136,6 +135,7 @@ public class AnimationsManager {
 
     private boolean isInCooldown(Player player) {
         long now = System.currentTimeMillis();
+        long ANIMATION_COOLDOWN_MILLIS = 10 * 1000;
         return animationCooldowns.getOrDefault(player.getUniqueId(), 0L) + ANIMATION_COOLDOWN_MILLIS > now;
     }
 
