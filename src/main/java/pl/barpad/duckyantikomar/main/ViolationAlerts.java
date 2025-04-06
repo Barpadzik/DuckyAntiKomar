@@ -22,10 +22,6 @@ public class ViolationAlerts {
     private final HashMap<String, Long> lastViolationTime = new HashMap<>();
     private FileConfiguration messagesConfig;
     private long alertTimeout;
-    private int maxKomarAAlerts;
-    private String komarACommand;
-    private String komarBCommand;
-    private String komarCCommand;
 
     public ViolationAlerts(Main plugin, DiscordHook discordHook, AnimationsManager animationsManager) {
         this.plugin = plugin;
@@ -58,10 +54,6 @@ public class ViolationAlerts {
     private void loadConfig() {
         FileConfiguration config = plugin.getConfig();
         alertTimeout = config.getLong("alert-timeout", 300) * 1000;
-        maxKomarAAlerts = config.getInt("Max-KomarA-Alerts", 5);
-        komarACommand = config.getString("KomarA-Command", "ban %player% AntiKomarSystem [KomarA]");
-        komarBCommand = config.getString("KomarB-Command", "ban %player% AntiKomarSystem [KomarB]");
-        komarCCommand = config.getString("KomarC-Command", "ban %player% AntiKomarSystem [KomarC]");
     }
 
     public void reportViolation(String playerName, String checkType) {
@@ -83,10 +75,6 @@ public class ViolationAlerts {
                 player.sendMessage(message);
             }
         }
-
-        if (checkType.equalsIgnoreCase("KomarA") && count >= maxKomarAAlerts) {
-            executePunishment(playerName, checkType, komarACommand);
-        }
     }
 
     public void executePunishment(String playerName, String check, String command) {
@@ -103,6 +91,7 @@ public class ViolationAlerts {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", playerName));
                     violations.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
                     lastViolationTime.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
+                    removeOldViolations();
                 }, 100L);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -112,6 +101,7 @@ public class ViolationAlerts {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", playerName));
                 violations.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
                 lastViolationTime.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));
+                removeOldViolations();
             });
         }
     }

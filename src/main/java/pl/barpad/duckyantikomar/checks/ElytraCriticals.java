@@ -37,7 +37,7 @@ public class ElytraCriticals implements Listener {
         FileConfiguration config = plugin.getConfig();
         enabled = config.getBoolean("KomarC-Enable", true);
         maxAlerts = config.getInt("Max-KomarC-Alerts", 5);
-        punishmentCommand = config.getString("KomarC-Command", "ban %player% AntiKomarSystem [KomarD]");
+        punishmentCommand = config.getString("KomarC-Command", "ban %player% AntiKomarSystem [KomarC]");
         debugMode = config.getBoolean("KomarC-Debug-Mode", false);
         criticalHitsRequired = config.getInt("KomarC-CriticalHitsRequired", 2);
         timeframe = config.getLong("KomarC-Timeframe", 500);
@@ -80,8 +80,7 @@ public class ElytraCriticals implements Listener {
                         Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) " + playerName + " triggered violation after 2 reports (VL: " + vl + ")");
                     }
 
-                    if (vl >= maxAlerts) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), punishmentCommand.replace("%player%", playerName));
+                    if (vl == maxAlerts) {
                         violationAlerts.executePunishment(playerName, "KomarC", punishmentCommand);
 
                         if (debugMode) {

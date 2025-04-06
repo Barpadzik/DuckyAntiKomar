@@ -1,6 +1,7 @@
 package pl.barpad.duckyantikomar.checks;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkMeta;
 import pl.barpad.duckyantikomar.Main;
 import pl.barpad.duckyantikomar.main.ViolationAlerts;
 
@@ -20,9 +20,11 @@ public class FireworkHitDelay implements Listener {
     private final Main plugin;
     private final ViolationAlerts violationAlerts;
     private final HashMap<UUID, Long> fireworkUsageTimes = new HashMap<>();
-    private volatile int maxFireworkDelay;
-    private volatile boolean debugMode;
-    private volatile boolean enabled;
+    private int maxAlerts;
+    private String punishmentCommand;
+    private int maxFireworkDelay;
+    private boolean debugMode;
+    private boolean enabled;
 
     public FireworkHitDelay(Main plugin, ViolationAlerts violationAlerts) {
         this.plugin = plugin;
@@ -36,9 +38,11 @@ public class FireworkHitDelay implements Listener {
         this.enabled = config.getBoolean("KomarA-Enable", true);
         this.maxFireworkDelay = config.getInt("Max-Firework-Delay", 100);
         this.debugMode = config.getBoolean("KomarA-Debug-Mode", false);
+        this.maxAlerts = config.getInt("Max-KomarA-Alerts", 5);
+        this.punishmentCommand = config.getString("KomarA-Command", "ban %player% AntiKomarSystem [KomarA]");
 
         if (debugMode) {
-            Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Reloaded config: enabled = " + enabled + ", maxFireworkDelay = " + maxFireworkDelay);
+            Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Config reloaded: enabled=" + enabled + ", delay=" + maxFireworkDelay + "ms");
         }
     }
 
@@ -49,13 +53,11 @@ public class FireworkHitDelay implements Listener {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
 
-        if (item != null && item.getItemMeta() instanceof FireworkMeta) {
-            if (player.isGliding()) {
-                fireworkUsageTimes.put(player.getUniqueId(), System.currentTimeMillis());
+        if (item != null && item.getType() == Material.FIREWORK_ROCKET && player.isGliding()) {
+            fireworkUsageTimes.put(player.getUniqueId(), System.currentTimeMillis());
 
-                if (debugMode) {
-                    Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Player " + player.getName() + " used a firework while gliding.");
-                }
+            if (debugMode) {
+                Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) " + player.getName() + " used a firework while gliding.");
             }
         }
     }
@@ -64,30 +66,36 @@ public class FireworkHitDelay implements Listener {
     public void onPlayerHit(EntityDamageByEntityEvent event) {
         if (!enabled) return;
 
-        if (!(event.getDamager() instanceof Player damager) || !(event.getEntity() instanceof Player victim)) {
-            return;
-        }
+        if (!(event.getDamager() instanceof Player damager) || !(event.getEntity() instanceof Player victim)) return;
 
         UUID damagerUUID = damager.getUniqueId();
+        String playerName = damager.getName();
 
-        if (!fireworkUsageTimes.containsKey(damagerUUID)) {
-            return;
-        }
+        Long fireworkTime = fireworkUsageTimes.remove(damagerUUID);
 
-        long fireworkTime = fireworkUsageTimes.get(damagerUUID);
-        long currentTime = System.currentTimeMillis();
-        long delay = currentTime - fireworkTime;
+        if (fireworkTime == null) return;
+
+        long delay = System.currentTimeMillis() - fireworkTime;
 
         if (debugMode) {
-            Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Player " + damager.getName() + " hit " + victim.getName() +
-                    " | Firework delay: " + delay + "ms | Max allowed: " + maxFireworkDelay + "ms");
+            Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) " + playerName + " hit " + victim.getName() +
+                    " | Delay: " + delay + "ms | Max: " + maxFireworkDelay + "ms");
         }
 
         if (delay <= maxFireworkDelay) {
-            violationAlerts.reportViolation(damager.getName(), "KomarA");
+            violationAlerts.reportViolation(playerName, "KomarA");
 
             if (debugMode) {
-                Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Violation detected for player " + damager.getName() + ". Reported as KomarA.");
+                Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Violation reported for " + playerName + " (KomarA).");
+            }
+
+            int vl = violationAlerts.getViolationCount(playerName, "KomarA");
+            if (vl >= maxAlerts) {
+                violationAlerts.executePunishment(playerName, "KomarA", punishmentCommand);
+
+                if (debugMode) {
+                    Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Punishment executed for " + playerName);
+                }
             }
         }
     }
