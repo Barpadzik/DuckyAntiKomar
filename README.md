@@ -1,11 +1,6 @@
 # 🛡️ Minecraft Anti-Cheat Plugin
 Our resource is an advanced anti-cheat plugin designed to detect and prevent unfair gameplay advantages in Minecraft servers. It specifically focuses on elytra flight abuse, firework-based exploits, and speed violations to ensure fair play.
 
-# ⚠️ Important Info
-This plugin is still in testing. This plugin need Java 21 to run.
-
-Plugin Versions for 1.18 and obove can be downloaded on our Guardly Community Discord
-
 ## 🔧 **Features**
 **Firework Hit Delay** 🎆
 
