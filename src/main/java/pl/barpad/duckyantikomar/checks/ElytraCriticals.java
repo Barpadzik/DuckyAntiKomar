@@ -52,8 +52,14 @@ public class ElytraCriticals implements Listener {
         if (attacker.isGliding() && attacker.getFallDistance() > 0.0) {
             String playerName = attacker.getName();
             long currentTime = System.currentTimeMillis();
+            boolean isCritical =
+                    attacker.getFallDistance() > 0 &&
+                            !attacker.isOnGround() &&
+                            !attacker.isInsideVehicle() &&
+                            !attacker.hasPotionEffect(org.bukkit.potion.PotionEffectType.BLINDNESS) &&
+                            attacker.getVelocity().getY() < 0;
 
-            if (event.isCritical()) {
+            if (isCritical) {
                 long lastTime = lastHitTime.getOrDefault(playerName, 0L);
                 if (currentTime - lastTime > timeframe) {
                     playerCriticalHits.put(playerName, 1);

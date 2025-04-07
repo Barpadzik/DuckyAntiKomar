@@ -21,16 +21,16 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
 
         int serviceId = 24978;
-        MetricsLite metricsLite = new MetricsLite(this, serviceId);
+        new MetricsLite(this, serviceId);
 
         AnimationsManager animationsManager = new AnimationsManager(this);
         discordHook = new DiscordHook(this);
         violationAlerts = new ViolationAlerts(this, discordHook, animationsManager);
 
-        FireworkHitDelay fireworkHitDelay = new FireworkHitDelay(this, violationAlerts);
-        ElytraCriticals elytraCriticals = new ElytraCriticals(this, violationAlerts);
+        new FireworkHitDelay(this, violationAlerts);
+        new ElytraCriticals(this, violationAlerts);
 
-        new Reload(this, fireworkHitDelay, elytraCriticals);
+        new Reload(this);
         new UpdateChecker(this).checkForUpdates();
 
         getLogger().info("DuckyAntiKomar has been successfully enabled!");

@@ -5,9 +5,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import pl.barpad.duckyantikomar.Main;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -16,7 +15,7 @@ import java.net.URL;
 public class UpdateChecker {
     private final Main plugin;
     private FileConfiguration messagesConfig;
-    private static final String GITHUB_API_URL = "https://api.github.com/repos/Barpadzik/DuckyAntiKomar/releases/latest ";
+    private static final String GITHUB_API_URL = "https://api.github.com/repos/Barpadzik/DuckyAntiKomar/releases/latest";
 
     public UpdateChecker(Main plugin) {
         this.plugin = plugin;
@@ -42,10 +41,24 @@ public class UpdateChecker {
                 connection.setReadTimeout(5000);
                 connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 
-                JSONParser parser = new JSONParser();
-                JSONObject response = (JSONObject) parser.parse(new InputStreamReader(connection.getInputStream()));
-                String latestVersion = (String) response.get("tag_name");
-                String downloadUrl = (String) response.get("html_url");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+
+                reader.close();
+                String json = responseBuilder.toString();
+
+                // Parsujemy "tag_name" i "html_url" ręcznie
+                String latestVersion = extractValue(json, "tag_name");
+                String downloadUrl = extractValue(json, "html_url");
+
+                if (latestVersion == null || downloadUrl == null) {
+                    throw new Exception("Could not parse GitHub response.");
+                }
 
                 if (!plugin.getDescription().getVersion().equalsIgnoreCase(latestVersion)) {
                     String updateMessage = ChatColor.translateAlternateColorCodes('&',
@@ -66,11 +79,25 @@ public class UpdateChecker {
                                 player.sendMessage(downloadMessage);
                             });
                 }
+
             } catch (Exception e) {
                 String errorMessage = ChatColor.translateAlternateColorCodes('&',
                         messagesConfig.getString("update-check-failed", "§6§lANTIKOMAR §8» &cCould not check for updates."));
                 Bukkit.getConsoleSender().sendMessage(errorMessage);
             }
         });
+    }
+
+    // Prosta metoda do pobierania wartości z JSONa (bez bibliotek)
+    private String extractValue(String json, String key) {
+        String searchKey = "\"" + key + "\":";
+        int index = json.indexOf(searchKey);
+        if (index == -1) return null;
+
+        int start = json.indexOf('"', index + searchKey.length() + 1);
+        int end = json.indexOf('"', start + 1);
+        if (start == -1 || end == -1) return null;
+
+        return json.substring(start + 1, end);
     }
 }

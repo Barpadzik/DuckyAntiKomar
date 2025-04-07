@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import pl.barpad.duckyantikomar.Main;
 
+import java.util.Objects;
+
 public class AnimationLava {
 
     private final Main plugin;
@@ -40,7 +42,7 @@ public class AnimationLava {
             double x = (Math.random() - 0.5) * 2;
             double y = Math.random() * 1.5;
             double z = (Math.random() - 0.5) * 2;
-            location.getWorld().spawnParticle(Particle.LAVA, location.clone().add(x, y, z), 1);
+            Objects.requireNonNull(location.getWorld()).spawnParticle(Particle.LAVA, location.clone().add(x, y, z), 1);
         }
     }
 

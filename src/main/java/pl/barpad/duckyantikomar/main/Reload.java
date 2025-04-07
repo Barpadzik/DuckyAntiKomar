@@ -4,7 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.jetbrains.annotations.NotNull;
 import pl.barpad.duckyantikomar.Main;
 import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
 import pl.barpad.duckyantikomar.checks.ElytraCriticals;
@@ -19,7 +18,7 @@ public class Reload extends AbstractCommand {
     private FileConfiguration messagesConfig;
     private File messagesFile;
 
-    public Reload(Main plugin, FireworkHitDelay fireworkHitDelay, ElytraCriticals elytraCriticals) {
+    public Reload(Main plugin) {
         super("antikomar", "Plugin Reload", "/antikomar reload", "§f§l≫ §cUnknown Command");
         this.plugin = plugin;
         this.register();
@@ -48,7 +47,7 @@ public class Reload extends AbstractCommand {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String [] args) {
         if (!sender.hasPermission("antikomar.reload")) {
             sender.sendMessage(getMessage("no-permission"));
             return false;
@@ -68,7 +67,7 @@ public class Reload extends AbstractCommand {
     }
 
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String @NotNull [] args) {
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String [] args) {
         if (sender.hasPermission("antikomar.reload")) {
             if (args.length == 1) {
                 return Collections.singletonList("reload");

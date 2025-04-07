@@ -8,7 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -93,9 +92,9 @@ public abstract class AbstractCommand implements CommandExecutor, TabExecutor {
         return this.getCommandMap();
     }
 
-    public abstract boolean onCommand(@NotNull CommandSender var1, @NotNull Command var2, @NotNull String var3, String[] var4);
+    public abstract boolean onCommand(CommandSender var1, Command var2, String var3, String[] var4);
 
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         return null;
     }
 
@@ -126,14 +125,14 @@ public abstract class AbstractCommand implements CommandExecutor, TabExecutor {
             this.exe = exe;
         }
 
-        public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
+        public boolean execute(CommandSender sender, String commandLabel, String[] args) {
             if (this.exe != null) {
                 return this.exe.onCommand(sender, this, commandLabel, args);
             }
             return false;
         }
 
-        public List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alais, String[] args) {
+        public List<String> tabComplete(CommandSender sender, String alais, String[] args) {
             if (this.exe != null) {
                 return this.exe.onTabComplete(sender, this, alais, args);
             }

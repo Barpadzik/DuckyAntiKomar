@@ -57,14 +57,14 @@ public class AnimationGuardians {
         // Create the animation task
         BukkitRunnable animationTask = new BukkitRunnable() {
             int ticks = 0;
-            double radius = 2.5;
-            double height = 1.5;
-            double anglePerTick = 0.1;
+            final double radius = 2.5;
+            final double height = 1.5;
+            final double anglePerTick = 0.1;
 
             @Override
             public void run() {
                 // Stop conditions
-                if (ticks >= 100 || player == null || !player.isOnline()) {
+                if (ticks >= 100 || !player.isOnline()) {
                     // Clean up
                     for (Guardian guardian : guardians) {
                         if (guardian != null && !guardian.isDead()) {
