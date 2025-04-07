@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import pl.barpad.duckyantikomar.Main;
 import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
 import pl.barpad.duckyantikomar.checks.ElytraCriticals;
-import pl.barpad.duckyantikomar.checks.AboveMaxSpeed;
 
 import java.io.File;
 import java.util.Collections;
@@ -19,14 +18,10 @@ public class Reload extends AbstractCommand {
     private final Main plugin;
     private FileConfiguration messagesConfig;
     private File messagesFile;
-    private final FireworkHitDelay fireworkHitDelay;
-    private final ElytraCriticals elytraCriticals;
 
     public Reload(Main plugin, FireworkHitDelay fireworkHitDelay, ElytraCriticals elytraCriticals) {
         super("antikomar", "Plugin Reload", "/antikomar reload", "§f§l≫ §cUnknown Command");
         this.plugin = plugin;
-        this.fireworkHitDelay = fireworkHitDelay;
-        this.elytraCriticals = elytraCriticals;
         this.register();
         loadMessages();
     }

@@ -2,7 +2,6 @@ package pl.barpad.duckyantikomar;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.barpad.duckyantikomar.animations.AnimationsManager;
-import pl.barpad.duckyantikomar.checks.AboveMaxSpeed;
 import pl.barpad.duckyantikomar.checks.ElytraCriticals;
 import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
 import pl.barpad.duckyantikomar.main.DiscordHook;
@@ -30,7 +29,6 @@ public final class Main extends JavaPlugin {
 
         FireworkHitDelay fireworkHitDelay = new FireworkHitDelay(this, violationAlerts);
         ElytraCriticals elytraCriticals = new ElytraCriticals(this, violationAlerts);
-        // AboveMaxSpeed aboveMaxSpeed = new AboveMaxSpeed(this, violationAlerts);
 
         new Reload(this, fireworkHitDelay, elytraCriticals);
         new UpdateChecker(this).checkForUpdates();
