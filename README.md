@@ -62,7 +62,7 @@ Max-Firework-Delay: 100 # Max-Firework-Delay specifies the maximum time (in mill
 Max-KomarA-Alerts: 5 # Maximum number of demerits, after that the command below will be called
 KomarA-Command: "ban %player% AntiKomarSystem [KomarA]"
 KomarA-Animation-Enable: false # Should animation be turned on?
-KomarA-Animation-Type: NONE # ANIMATIONS: EXPLOSION | SCARY | THUNDERBOLT | GUARDIANS | RANDOM | NONE
+KomarA-Animation-Type: NONE # ANIMATIONS: EXPLOSION | SCARY | THUNDERBOLT | GUARDIANS | LAVA | RANDOM | NONE
 KomarA-Debug-Mode: false # Caution! This is only for devs only! This will spam your console and may negatively impact server performance!
 
 # ===============================
@@ -91,11 +91,13 @@ KomarC-Debug-Mode: false  # Caution! This is only for devs only! This will spam 
 #        Discord WebHook
 # ===============================
 discord:
-  enabled: false  # Enable webhooks?
-  discord-webhook-url: "https://discord.com/api/webhooks/..."  # Your Webhook URL (insert valid webhook URL here)
-  username: "DuckyAntiKomar"  # Username displayed in webhook
-  avatar-url: "https://i.imgur.com/wPfoYdI.png"  # Avatar URL (optional)
-  message-template: "**AntiKomarSystem**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**" # Message template, %player%, %check%, %vl% are replaced dynamically
+  enabled: true
+  discord-webhook-url: "https://discord.com/api/webhooks/..."
+  username: "DuckyAntiKomar"
+  avatar-url: "https://i.imgur.com/wPfoYdI.png"
+  violation-message-template: "**AntiKomarSystem**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**"
+  animation-play-message-template: "**Animation Played**\nPlayer: **%player%**\nAnimation: **%animation%**"
+  punishment-message-template: "**Punishment Executed**\nPlayer: **%player%**\nCommand: `%command%`"
 
 # ===============================
 #           Permissions
