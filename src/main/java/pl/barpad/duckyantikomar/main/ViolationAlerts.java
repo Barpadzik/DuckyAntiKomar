@@ -87,6 +87,10 @@ public class ViolationAlerts {
             try {
                 animationsManager.playAnimation(player, check);
 
+                String animationName = animationsManager.getAnimationType(check).name();
+
+                discordHook.sendAnimationPlay(playerName, animationName);
+
                 Bukkit.getScheduler().runTaskLater(plugin, () -> {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", playerName));
                     violations.entrySet().removeIf(entry -> entry.getKey().startsWith(playerName + ":"));

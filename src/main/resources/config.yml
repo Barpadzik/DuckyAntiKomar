@@ -42,11 +42,13 @@ KomarC-Debug-Mode: false  # Caution! This is only for devs only! This will spam 
 #        Discord WebHook
 # ===============================
 discord:
-  enabled: false  # Enable webhooks?
-  discord-webhook-url: "https://discord.com/api/webhooks/..."  # Your Webhook URL (insert valid webhook URL here)
-  username: "DuckyAntiKomar"  # Username displayed in webhook
-  avatar-url: "https://i.imgur.com/wPfoYdI.png"  # Avatar URL (optional)
-  message-template: "**AntiKomarSystem**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**" # Message template, %player%, %check%, %vl% are replaced dynamically
+  enabled: true
+  discord-webhook-url: "https://discord.com/api/webhooks/..."
+  username: "DuckyAntiKomar"
+  avatar-url: "https://i.imgur.com/wPfoYdI.png"
+  violation-message-template: "**AntiKomarSystem**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**"
+  animation-play-message-template: "**Animation Played**\nPlayer: **%player%**\nAnimation: **%animation%**"
+  punishment-message-template: "**Punishment Executed**\nPlayer: **%player%**\nCommand: `%command%`"
 
 # ===============================
 #           Permissions

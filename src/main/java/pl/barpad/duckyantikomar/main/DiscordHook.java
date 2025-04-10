@@ -17,7 +17,9 @@ public class DiscordHook {
     private String webhookUrl;
     private String username;
     private String avatarUrl;
-    private String messageTemplate;
+    private String violationMessageTemplate;
+    private String animationMessageTemplate;
+    private String punishmentMessageTemplate;
     private boolean discordEnabled;
 
     public DiscordHook(Main plugin) {
@@ -31,36 +33,63 @@ public class DiscordHook {
         webhookUrl = config.getString("discord.discord-webhook-url", "");
         username = config.getString("discord.username", "DuckyAntiKomar");
         avatarUrl = config.getString("discord.avatar-url", "https://i.imgur.com/wPfoYdI.png");
-        messageTemplate = config.getString("discord.message-template", "**AntiKomarSystem!**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**");
+        violationMessageTemplate = config.getString("discord.violation-message-template",
+                "**AntiKomarSystem!**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**");
+        animationMessageTemplate = config.getString("discord.animation-play-message-template",
+                "**Animation Played**\nPlayer: **%player%**\nAnimation: **%animation%**");
+        punishmentMessageTemplate = config.getString("discord.punishment-message-template",
+                "**Punishment Executed**\nPlayer: **%player%**\nCommand: `%command%`");
     }
 
     public void sendViolationAlert(String playerName, String checkType, int violationCount) {
         if (!discordEnabled) return;
+        String content = violationMessageTemplate
+                .replace("%player%", playerName)
+                .replace("%check%", checkType)
+                .replace("%vl%", String.valueOf(violationCount));
+
+        sendDiscordEmbed("🚨 AntiKomar System Alert 🚨", content, 0xFF0000);
+    }
+
+    public void sendAnimationPlay(String playerName, String animationName) {
+        if (!discordEnabled) return;
+        String content = animationMessageTemplate
+                .replace("%player%", playerName)
+                .replace("%animation%", animationName);
+
+        sendDiscordEmbed("🎬 Animation Played", content, 0x00AAFF);
+    }
+
+    public void sendPunishmentCommand(String playerName, String commandUsed) {
+        if (!discordEnabled) return;
+        String content = punishmentMessageTemplate
+                .replace("%player%", playerName)
+                .replace("%command%", commandUsed);
+
+        sendDiscordEmbed("🔨 Punishment Executed", content, 0xFFA500);
+    }
+
+    private void sendDiscordEmbed(String title, String description, int color) {
         if (webhookUrl == null || webhookUrl.isEmpty()) {
             Bukkit.getLogger().warning("[DuckyAntiKomar] Webhook URL is not set in config.yml!");
             return;
         }
 
-        String content = messageTemplate
-                .replace("%player%", playerName)
-                .replace("%check%", checkType)
-                .replace("%vl%", String.valueOf(violationCount));
-
         String jsonPayload = String.format(
                 "{ \"username\": \"%s\", \"avatar_url\": \"%s\", \"embeds\": [ { " +
-                        "\"title\": \"🚨 AntiKomar System Alert 🚨\", " +
+                        "\"title\": \"%s\", " +
                         "\"description\": \"%s\", " +
-                        "\"color\": 16711680, " +
+                        "\"color\": %d, " +
                         "\"footer\": { \"text\": \"DuckyAntiKomar\" }, " +
                         "\"timestamp\": \"%s\" } ] }",
-                escapeJson(username), escapeJson(avatarUrl), escapeJson(content), getCurrentTimestamp()
+                escapeJson(username), escapeJson(avatarUrl), escapeJson(title),
+                escapeJson(description), color, getCurrentTimestamp()
         );
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> sendDiscordMessage(jsonPayload));
     }
 
     private void sendDiscordMessage(String jsonPayload) {
-        if (!discordEnabled) return;
         try {
             URL url = new URL(webhookUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

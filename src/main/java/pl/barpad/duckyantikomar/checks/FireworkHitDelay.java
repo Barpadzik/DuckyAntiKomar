@@ -10,6 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import pl.barpad.duckyantikomar.Main;
+import pl.barpad.duckyantikomar.main.DiscordHook;
 import pl.barpad.duckyantikomar.main.ViolationAlerts;
 
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class FireworkHitDelay implements Listener {
 
     private final Main plugin;
     private final ViolationAlerts violationAlerts;
+    private final DiscordHook discordHook;
     private final HashMap<UUID, Long> fireworkUsageTimes = new HashMap<>();
     private int maxAlerts;
     private String punishmentCommand;
@@ -26,9 +28,10 @@ public class FireworkHitDelay implements Listener {
     private boolean debugMode;
     private boolean enabled;
 
-    public FireworkHitDelay(Main plugin, ViolationAlerts violationAlerts) {
+    public FireworkHitDelay(Main plugin, ViolationAlerts violationAlerts, DiscordHook discordHook) {
         this.plugin = plugin;
         this.violationAlerts = violationAlerts;
+        this.discordHook = discordHook;
         loadConfig();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
@@ -92,6 +95,8 @@ public class FireworkHitDelay implements Listener {
             int vl = violationAlerts.getViolationCount(playerName, "KomarA");
             if (vl >= maxAlerts) {
                 violationAlerts.executePunishment(playerName, "KomarA", punishmentCommand);
+                discordHook.sendPunishmentCommand(playerName, punishmentCommand);
+
 
                 if (debugMode) {
                     Bukkit.getLogger().info("[DuckyAntiKomar] (KomarA Debug) Punishment executed for " + playerName);

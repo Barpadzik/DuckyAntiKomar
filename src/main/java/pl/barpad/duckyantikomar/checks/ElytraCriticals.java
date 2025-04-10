@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import pl.barpad.duckyantikomar.main.DiscordHook;
 import pl.barpad.duckyantikomar.Main;
 import pl.barpad.duckyantikomar.main.ViolationAlerts;
 
@@ -16,6 +17,7 @@ public class ElytraCriticals implements Listener {
 
     private final Main plugin;
     private final ViolationAlerts violationAlerts;
+    private final DiscordHook discordHook;
     private boolean enabled;
     private int maxAlerts;
     private String punishmentCommand;
@@ -26,9 +28,10 @@ public class ElytraCriticals implements Listener {
     private final Map<String, Long> lastHitTime = new HashMap<>();
     private final Map<String, Integer> pendingViolations = new HashMap<>();
 
-    public ElytraCriticals(Main plugin, ViolationAlerts violationAlerts) {
+    public ElytraCriticals(Main plugin, ViolationAlerts violationAlerts, DiscordHook discordHook) {
         this.plugin = plugin;
         this.violationAlerts = violationAlerts;
+        this.discordHook = discordHook;
         loadConfig();
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
@@ -88,6 +91,8 @@ public class ElytraCriticals implements Listener {
 
                     if (vl == maxAlerts) {
                         violationAlerts.executePunishment(playerName, "KomarC", punishmentCommand);
+                        discordHook.sendPunishmentCommand(playerName, punishmentCommand);
+
 
                         if (debugMode) {
                             Bukkit.getLogger().info("[DuckyAntiKomar] (KomarC Debug) Penalty executed for " + playerName);

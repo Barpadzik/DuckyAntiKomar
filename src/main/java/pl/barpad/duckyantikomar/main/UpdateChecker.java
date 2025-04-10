@@ -52,7 +52,6 @@ public class UpdateChecker {
                 reader.close();
                 String json = responseBuilder.toString();
 
-                // Parsujemy "tag_name" i "html_url" ręcznie
                 String latestVersion = extractValue(json, "tag_name");
                 String downloadUrl = extractValue(json, "html_url");
 
@@ -88,7 +87,6 @@ public class UpdateChecker {
         });
     }
 
-    // Prosta metoda do pobierania wartości z JSONa (bez bibliotek)
     private String extractValue(String json, String key) {
         String searchKey = "\"" + key + "\":";
         int index = json.indexOf(searchKey);

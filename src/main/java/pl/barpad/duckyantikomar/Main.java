@@ -27,8 +27,8 @@ public final class Main extends JavaPlugin {
         discordHook = new DiscordHook(this);
         violationAlerts = new ViolationAlerts(this, discordHook, animationsManager);
 
-        new FireworkHitDelay(this, violationAlerts);
-        new ElytraCriticals(this, violationAlerts);
+        new FireworkHitDelay(this, violationAlerts, discordHook);
+        new ElytraCriticals(this, violationAlerts, discordHook);
 
         new Reload(this);
         new UpdateChecker(this).checkForUpdates();
