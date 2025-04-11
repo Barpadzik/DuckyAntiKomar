@@ -93,7 +93,7 @@ public class FireworkHitDelay implements Listener {
             }
 
             int vl = violationAlerts.getViolationCount(playerName, "KomarA");
-            if (vl >= maxAlerts) {
+            if (vl == maxAlerts) {
                 violationAlerts.executePunishment(playerName, "KomarA", punishmentCommand);
                 discordHook.sendPunishmentCommand(playerName, punishmentCommand);
 
