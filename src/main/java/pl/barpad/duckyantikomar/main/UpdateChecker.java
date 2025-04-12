@@ -88,14 +88,16 @@ public class UpdateChecker {
     }
 
     private String extractValue(String json, String key) {
-        String searchKey = "\"" + key + "\":";
-        int index = json.indexOf(searchKey);
-        if (index == -1) return null;
+        String searchKey = "\"" + key + "\"";
+        int keyIndex = json.indexOf(searchKey);
+        if (keyIndex == -1) return null;
 
-        int start = json.indexOf('"', index + searchKey.length() + 1);
-        int end = json.indexOf('"', start + 1);
-        if (start == -1 || end == -1) return null;
+        int colonIndex = json.indexOf(":", keyIndex);
+        int quoteStart = json.indexOf("\"", colonIndex);
+        int quoteEnd = json.indexOf("\"", quoteStart + 1);
 
-        return json.substring(start + 1, end);
+        if (quoteStart == -1 || quoteEnd == -1) return null;
+
+        return json.substring(quoteStart + 1, quoteEnd);
     }
 }
