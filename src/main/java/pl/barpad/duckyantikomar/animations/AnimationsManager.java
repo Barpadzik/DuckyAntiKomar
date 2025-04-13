@@ -107,9 +107,6 @@ public class AnimationsManager {
         AnimationType randomType = availableAnimations.get(random.nextInt(availableAnimations.size()));
 
         switch (randomType) {
-            case THUNDERBOLT:
-                animationThunderBolt.play(player);
-                break;
             case SCARY:
                 animationScary.play(player);
                 break;

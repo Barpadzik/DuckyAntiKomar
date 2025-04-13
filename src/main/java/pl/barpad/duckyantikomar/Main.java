@@ -12,9 +12,6 @@ import pl.barpad.duckyantikomar.metrics.MetricsLite;
 
 public final class Main extends JavaPlugin {
 
-    private ViolationAlerts violationAlerts;
-    private DiscordHook discordHook;;
-
     @Override
     public void onEnable() {
         getLogger().info("DuckyAntiKomar Enabled | Author: Barpad");
@@ -24,8 +21,8 @@ public final class Main extends JavaPlugin {
         new MetricsLite(this, serviceId);
 
         AnimationsManager animationsManager = new AnimationsManager(this);
-        discordHook = new DiscordHook(this);
-        violationAlerts = new ViolationAlerts(this, discordHook, animationsManager);
+        DiscordHook discordHook = new DiscordHook(this);
+        ViolationAlerts violationAlerts = new ViolationAlerts(this, discordHook, animationsManager);
 
         new FireworkHitDelay(this, violationAlerts, discordHook);
         new ElytraCriticals(this, violationAlerts, discordHook);
