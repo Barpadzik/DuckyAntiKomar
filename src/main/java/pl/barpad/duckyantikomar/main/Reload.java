@@ -5,8 +5,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import pl.barpad.duckyantikomar.Main;
-import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
-import pl.barpad.duckyantikomar.checks.ElytraCriticals;
 
 import java.io.File;
 import java.util.Collections;

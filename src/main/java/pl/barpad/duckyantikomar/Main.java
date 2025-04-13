@@ -13,7 +13,7 @@ import pl.barpad.duckyantikomar.metrics.MetricsLite;
 public final class Main extends JavaPlugin {
 
     private ViolationAlerts violationAlerts;
-    private DiscordHook discordHook;
+    private DiscordHook discordHook;;
 
     @Override
     public void onEnable() {
