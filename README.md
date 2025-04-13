@@ -91,7 +91,7 @@ KomarC-Debug-Mode: false  # Caution! This is only for devs only! This will spam 
 #        Discord WebHook
 # ===============================
 discord:
-  enabled: true
+  enabled: false
   discord-webhook-url: "https://discord.com/api/webhooks/..."
   username: "DuckyAntiKomar"
   avatar-url: "https://i.imgur.com/wPfoYdI.png"
