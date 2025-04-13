@@ -48,7 +48,7 @@ public class AnimationScary {
                 Location currentLoc = player.getLocation();
 
                 player.getWorld().spawnParticle(
-                        Particle.ELDER_GUARDIAN,
+                        Particle.MOB_APPEARANCE,
                         currentLoc.getX(), currentLoc.getY(), currentLoc.getZ(),
                         20,
                         0.1, 0.1, 0.1,

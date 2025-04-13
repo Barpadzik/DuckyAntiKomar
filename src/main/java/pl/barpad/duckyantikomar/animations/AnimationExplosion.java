@@ -33,7 +33,7 @@ public class AnimationExplosion {
                 Location currentLoc = player.getLocation();
 
                 player.getWorld().spawnParticle(
-                        Particle.EXPLOSION,
+                        Particle.EXPLOSION_LARGE,
                         currentLoc.getX(), currentLoc.getY(), currentLoc.getZ(),
                         10,
                         0.5, 0.5, 0.5,

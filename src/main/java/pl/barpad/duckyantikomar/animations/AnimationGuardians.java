@@ -54,7 +54,6 @@ public class AnimationGuardians {
             armorStands.add(stand);
         }
 
-        // Create the animation task
         BukkitRunnable animationTask = new BukkitRunnable() {
             int ticks = 0;
             final double radius = 2.5;
@@ -63,9 +62,7 @@ public class AnimationGuardians {
 
             @Override
             public void run() {
-                // Stop conditions
                 if (ticks >= 100 || !player.isOnline()) {
-                    // Clean up
                     for (Guardian guardian : guardians) {
                         if (guardian != null && !guardian.isDead()) {
                             guardian.remove();
@@ -82,20 +79,16 @@ public class AnimationGuardians {
                     return;
                 }
 
-                // Get current player location
                 Location playerLoc = player.getLocation();
 
-                // Calculate base rotation angle
                 double baseAngle = ticks * anglePerTick;
 
-                // Update each guardian and armor stand position
                 for (int i = 0; i < armorStands.size(); i++) {
                     ArmorStand stand = armorStands.get(i);
                     Guardian guardian = guardians.get(i);
 
                     if (stand == null || stand.isDead() || guardian == null || guardian.isDead()) continue;
 
-                    // Calculate position in circle around player
                     double angle = baseAngle + ((Math.PI * 2) / armorStands.size() * i);
                     double x = Math.cos(angle) * radius;
                     double z = Math.sin(angle) * radius;
