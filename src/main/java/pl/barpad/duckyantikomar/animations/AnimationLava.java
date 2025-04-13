@@ -30,7 +30,7 @@ public class AnimationLava {
 
                 Location loc = player.getLocation();
                 spawnLavaParticles(loc);
-                playLavaSound(player);
+                player.playSound(player.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 1.2f, 1.8f);
 
                 ticks++;
             }
@@ -44,9 +44,5 @@ public class AnimationLava {
             double z = (Math.random() - 0.5) * 2;
             Objects.requireNonNull(location.getWorld()).spawnParticle(Particle.LAVA, location.clone().add(x, y, z), 1);
         }
-    }
-
-    private void playLavaSound(Player player) {
-        player.playSound(player.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 1.2f, 1.8f);
     }
 }
