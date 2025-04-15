@@ -1,50 +1,46 @@
-# 🛡️ Minecraft Anti-Cheat Plugin
-Our resource is an advanced anti-cheat plugin designed to detect and prevent unfair gameplay advantages in Minecraft servers. It specifically focuses on elytra flight abuse, firework-based exploits, and speed violations to ensure fair play.
+# 🛡️ DuckyAntiKomar - Advanced Minecraft Anti-Cheat
 
-## 🔧 **Features**
-**Firework Hit Delay** 🎆
+**DuckyAntiKomar** is a powerful anti-cheat plugin focused on detecting and preventing unfair Elytra-based exploits, including firework abuse, suspicious speed, and illegal critical hits.  
+Compatible with **Minecraft 1.16.5 – 1.21+**.
 
-Monitors firework usage during elytra flight.
-Prevents players from attacking immediately after boosting with fireworks.
+---
 
-**Elytra Criticals** 🗡️
+## 🚀 Features
 
-Detects critical hits that are dealt impossible quickly after using fireworks
+### 🎆 Firework Hit Delay (`KomarA`)
+- Blocks attacks performed too soon after using fireworks during Elytra flight.
+- Customizable delay, punishment, and alert system.
 
-**Elytra Speed Checks** 🚀 [Soon - In 2.0]
+### 🚧 Elytra Speed Checks (`KomarB`) — *Coming in 2.0*
+- Flags players flying faster than allowed based on pitch and velocity.
+- Prevents unnatural acceleration via exploit clients or firework spam.
 
-Detects players exceeding configured speed limits based on flight angles.
-Prevents unfair speed boosts using fireworks.
+### 🗡️ Elytra Criticals (`KomarC`)
+- Detects players performing multiple critical hits in a short timeframe during Elytra flight.
+- Helps prevent hacked-client critical abuse.
 
-**Violation Alerts** ⚠️
+### ⚠️ Violation Alerts
+- Real-time admin notifications in **chat** and **console**.
+- Auto-clears alerts after a configurable timeout (default: 5 minutes).
+- Discord Webhook support for remote logging.
 
-Notifies admins about detected rule violations.
-Alerts are sent in both chat and console.
-Auto-clears alerts after 5 minutes.
+### 🪝 Discord Webhook Integration
+- Sends alerts, animations, and punishment logs to Discord.
+- Fully customizable content and formatting.
 
-**Discord WebHook** 🪝
+---
 
-Discord Webhook Integration > All alerts on your Discord!
+## ⚙️ Configuration
 
-## ⚙️ **Configuration**
-All settings, such as maximum allowed speed and firework hit delay, can be adjusted in config.yml.
+All settings are fully customizable:
 
-All messages, can be tranlated via messages.yml.
+- Enable/disable individual checks
+- Define thresholds and timeframes
+- Choose punishment commands and visual effects
+- Translate all messages
+- Integrate with Discord
 
-## 🎮 **Permissions**
-antikomar.alerts – Grants access to violation alerts.
-
-antikomar.bypass – Allows a player to bypass all checks, making them immune to detection.
-
-anitkomar.reload - Allows player to reload plugin in game via /antinuker reload
-
-## 📞 Support & Issues
-If you have any questions, bug reports, or feature requests, feel free to join our Discord server for support!
-
-### 📜 License
-This plugin is licensed under the GNU General Public License v3.0 (GPLv3), meaning it is open-source and can be freely modified and redistributed under the same license.
-
-### config.yml (default)
+<summary><strong>📁 Example: config.yml</strong></summary>
 
 ```
 # ===============================
@@ -110,7 +106,7 @@ permissions:
 # Changing this will not change the permissions in the plugin!
 ```
 
-### messages.yml (default)
+<summary><strong>📁 Example: messages.yml</strong></summary>
 
 ```
 alert-message: '§6§lANTIKOMAR §8»§f Player §7»§f %player% §7»§6 %check% §7(§c%vl%VL§7)'
