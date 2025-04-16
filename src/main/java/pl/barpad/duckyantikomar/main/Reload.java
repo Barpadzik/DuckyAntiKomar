@@ -15,10 +15,14 @@ public class Reload extends AbstractCommand {
     private final Main plugin;
     private FileConfiguration messagesConfig;
     private File messagesFile;
+    private final ConfigManager configManager;
+    private final ViolationAlerts violationAlerts;
 
-    public Reload(Main plugin) {
+    public Reload(Main plugin, ConfigManager configManager, ViolationAlerts violationAlerts) {
         super("antikomar", "Plugin Reload", "/antikomar reload", "§f§l≫ §cUnknown Command");
         this.plugin = plugin;
+        this.configManager = configManager;
+        this.violationAlerts = violationAlerts;
         this.register();
         loadMessages();
     }
@@ -47,21 +51,27 @@ public class Reload extends AbstractCommand {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String [] args) {
         if (!sender.hasPermission("antikomar.reload")) {
-            sender.sendMessage(getMessage("no-permission"));
+            sender.sendMessage(color(getMessage("no-permission")));
             return false;
         }
 
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             plugin.reloadConfig();
+            configManager.reload();
             reloadMessages();
+            violationAlerts.clearAllViolations();
 
-            sender.sendMessage(getMessage("config-reloaded"));
-            sender.sendMessage(getMessage("plugin-reloaded"));
+            sender.sendMessage(color(getMessage("config-reloaded")));
+            sender.sendMessage(color(getMessage("plugin-reloaded")));
             return true;
         }
 
-        sender.sendMessage(getMessage("incorrect-usage"));
+        sender.sendMessage(color(getMessage("incorrect-usage")));
         return false;
+    }
+
+    private String color(String message) {
+        return message == null ? "" : message.replace("&", "§");
     }
 
     @Override

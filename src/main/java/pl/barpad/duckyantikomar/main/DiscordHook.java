@@ -1,7 +1,6 @@
 package pl.barpad.duckyantikomar.main;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import pl.barpad.duckyantikomar.Main;
 
 import java.io.BufferedReader;
@@ -14,31 +13,24 @@ import java.nio.charset.StandardCharsets;
 public class DiscordHook {
 
     private final Main plugin;
-    private String webhookUrl;
-    private String username;
-    private String avatarUrl;
-    private String violationMessageTemplate;
-    private String animationMessageTemplate;
-    private String punishmentMessageTemplate;
-    private boolean discordEnabled;
 
-    public DiscordHook(Main plugin) {
+    private final String webhookUrl;
+    private final String username;
+    private final String avatarUrl;
+    private final String violationMessageTemplate;
+    private final String animationMessageTemplate;
+    private final String punishmentMessageTemplate;
+    private final boolean discordEnabled;
+
+    public DiscordHook(Main plugin, ConfigManager configManager) {
         this.plugin = plugin;
-        loadConfig();
-    }
-
-    private void loadConfig() {
-        FileConfiguration config = plugin.getConfig();
-        discordEnabled = config.getBoolean("discord.enabled", false);
-        webhookUrl = config.getString("discord.discord-webhook-url", "");
-        username = config.getString("discord.username", "DuckyAntiKomar");
-        avatarUrl = config.getString("discord.avatar-url", "https://i.imgur.com/wPfoYdI.png");
-        violationMessageTemplate = config.getString("discord.violation-message-template",
-                "**AntiKomarSystem!**\nPlayer: **%player%**\nCheck: **%check%**\nViolation: **%vl%**");
-        animationMessageTemplate = config.getString("discord.animation-play-message-template",
-                "**Animation Played**\nPlayer: **%player%**\nAnimation: **%animation%**");
-        punishmentMessageTemplate = config.getString("discord.punishment-message-template",
-                "**Punishment Executed**\nPlayer: **%player%**\nCommand: `%command%`");
+        this.discordEnabled = configManager.isDiscordEnabled();
+        this.webhookUrl = configManager.getDiscordWebhookUrl();
+        this.username = configManager.getDiscordUsername();
+        this.avatarUrl = configManager.getDiscordAvatarUrl();
+        this.violationMessageTemplate = configManager.getDiscordViolationMessageTemplate();
+        this.animationMessageTemplate = configManager.getDiscordAnimationMessageTemplate();
+        this.punishmentMessageTemplate = configManager.getDiscordPunishmentMessageTemplate();
     }
 
     public void sendViolationAlert(String playerName, String checkType, int violationCount) {
@@ -106,12 +98,12 @@ public class DiscordHook {
             int responseCode = connection.getResponseCode();
             if (responseCode != 204) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
-                    String line;
                     StringBuilder response = new StringBuilder();
+                    String line;
                     while ((line = reader.readLine()) != null) {
                         response.append(line);
                     }
-                    Bukkit.getLogger().warning("[DuckyAntiKomar] Discord error response: " + response.toString());
+                    Bukkit.getLogger().warning("[DuckyAntiKomar] Discord error response: " + response);
                 }
             }
         } catch (Exception e) {

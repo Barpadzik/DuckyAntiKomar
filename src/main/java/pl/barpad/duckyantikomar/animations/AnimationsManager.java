@@ -2,6 +2,7 @@ package pl.barpad.duckyantikomar.animations;
 
 import org.bukkit.entity.Player;
 import pl.barpad.duckyantikomar.Main;
+import pl.barpad.duckyantikomar.main.ConfigManager;
 
 import java.util.*;
 
@@ -12,6 +13,7 @@ public class AnimationsManager {
     }
 
     private final Main plugin;
+    private final ConfigManager configManager;
     private final AnimationThunderBolt animationThunderBolt;
     private final AnimationScary animationScary;
     private final AnimationExplosion animationExplosion;
@@ -21,8 +23,9 @@ public class AnimationsManager {
 
     private final Map<UUID, Long> animationCooldowns = new HashMap<>();
 
-    public AnimationsManager(Main plugin) {
+    public AnimationsManager(Main plugin, ConfigManager configManager) {
         this.plugin = plugin;
+        this.configManager = configManager;
         this.animationThunderBolt = new AnimationThunderBolt(plugin);
         this.animationScary = new AnimationScary(plugin);
         this.animationExplosion = new AnimationExplosion(plugin);
@@ -32,12 +35,12 @@ public class AnimationsManager {
     }
 
     public boolean isAnimationEnabled(String check) {
-        return plugin.getConfig().getBoolean(check + "-Animation-Enable", false);
+        return configManager.getBoolean(check + "-Animation-Enable", false);
     }
 
     public AnimationType getAnimationType(String check) {
         try {
-            return AnimationType.valueOf(plugin.getConfig().getString(check + "-Animation-Type", "NONE").toUpperCase());
+            return AnimationType.valueOf(configManager.getString(check + "-Animation-Type", "NONE").toUpperCase());
         } catch (IllegalArgumentException e) {
             return AnimationType.NONE;
         }
@@ -47,7 +50,7 @@ public class AnimationsManager {
         if (!isAnimationEnabled(check)) return;
 
         if (isInCooldown(player)) {
-            if (plugin.getConfig().getBoolean("Debug", false)) {
+            if (configManager.isDebug()) {
                 plugin.getLogger().info("Blocked animation for " + player.getName() + " (cooldown active)");
             }
             return;
@@ -91,18 +94,19 @@ public class AnimationsManager {
 
     private void playRandomAnimation(Player player) {
         if (isInCooldown(player)) {
-            if (plugin.getConfig().getBoolean("Debug", false)) {
+            if (configManager.isDebug()) {
                 plugin.getLogger().info("Blocked random animation for " + player.getName() + " (cooldown active)");
             }
             return;
         }
 
-        List<AnimationType> availableAnimations = new ArrayList<>();
-        availableAnimations.add(AnimationType.THUNDERBOLT);
-        availableAnimations.add(AnimationType.SCARY);
-        availableAnimations.add(AnimationType.EXPLOSION);
-        availableAnimations.add(AnimationType.GUARDIANS);
-        availableAnimations.add(AnimationType.LAVA);
+        List<AnimationType> availableAnimations = Arrays.asList(
+                AnimationType.THUNDERBOLT,
+                AnimationType.SCARY,
+                AnimationType.EXPLOSION,
+                AnimationType.GUARDIANS,
+                AnimationType.LAVA
+        );
 
         AnimationType randomType = availableAnimations.get(random.nextInt(availableAnimations.size()));
 
@@ -125,7 +129,7 @@ public class AnimationsManager {
 
         updateCooldown(player);
 
-        if (plugin.getConfig().getBoolean("Debug", false)) {
+        if (configManager.isDebug()) {
             plugin.getLogger().info("Random animation selected: " + randomType.name() + " for player " + player.getName());
         }
     }

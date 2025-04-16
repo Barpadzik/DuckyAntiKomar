@@ -1,14 +1,10 @@
 package pl.barpad.duckyantikomar.main;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import pl.barpad.duckyantikomar.Main;
 import pl.barpad.duckyantikomar.animations.AnimationsManager;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,40 +16,24 @@ public class ViolationAlerts {
     private final AnimationsManager animationsManager;
     private final HashMap<String, Integer> violations = new HashMap<>();
     private final HashMap<String, Long> lastViolationTime = new HashMap<>();
-    private FileConfiguration messagesConfig;
     private long alertTimeout;
+    private String alertMessage;
 
-    public ViolationAlerts(Main plugin, DiscordHook discordHook, AnimationsManager animationsManager) {
+    private final ConfigManager configManager;
+
+    public ViolationAlerts(Main plugin, DiscordHook discordHook, AnimationsManager animationsManager, ConfigManager configManager) {
         this.plugin = plugin;
         this.discordHook = discordHook;
         this.animationsManager = animationsManager;
-        loadMessagesConfig();
+        this.configManager = configManager;
+
         loadConfig();
         startCleanupTask();
     }
 
-    private void loadMessagesConfig() {
-        File messagesFile = new File(plugin.getDataFolder(), "messages.yml");
-        if (!messagesFile.exists()) {
-            plugin.saveResource("messages.yml", false);
-        }
-        messagesConfig = YamlConfiguration.loadConfiguration(messagesFile);
-        messagesConfig.addDefault("alert-message", "§6§lANTIKOMAR §8»§f Player §7»§f %player% §7»§6 %check% §7(§c%vl%VL§7)");
-        messagesConfig.options().copyDefaults(true);
-        saveMessagesConfig();
-    }
-
-    private void saveMessagesConfig() {
-        try {
-            messagesConfig.save(new File(plugin.getDataFolder(), "messages.yml"));
-        } catch (IOException e) {
-            Bukkit.getLogger().severe("§6§lANTIKOMAR §8»§c Could not save messages.yml!");
-        }
-    }
-
     private void loadConfig() {
-        FileConfiguration config = plugin.getConfig();
-        alertTimeout = config.getLong("alert-timeout", 300) * 1000;
+        alertTimeout = configManager.getAlertTimeoutSeconds() * 1000L;
+        alertMessage = configManager.getString("alert-message", "§6§lANTIKOMAR §8»§f Player §7»§f %player% §7»§6 %check% §7(§c%vl%VL§7)");
     }
 
     public void reportViolation(String playerName, String checkType) {
@@ -62,8 +42,7 @@ public class ViolationAlerts {
         violations.put(key, count);
         lastViolationTime.put(key, System.currentTimeMillis());
 
-        String messageTemplate = messagesConfig.getString("alert-message", "§6§lANTIKOMAR §8»§f Player §7»§f %player% §7»§6 %check% §7(§c%vl%VL§7)");
-        String message = messageTemplate.replace("%player%", playerName)
+        String message = alertMessage.replace("%player%", playerName)
                 .replace("%check%", checkType)
                 .replace("%vl%", String.valueOf(count));
 
@@ -117,6 +96,11 @@ public class ViolationAlerts {
 
     private void startCleanupTask() {
         Bukkit.getScheduler().runTaskTimer(plugin, this::removeOldViolations, 1200L, 1200L);
+    }
+
+    public void clearAllViolations() {
+        violations.clear();
+        lastViolationTime.clear();
     }
 
     private void removeOldViolations() {

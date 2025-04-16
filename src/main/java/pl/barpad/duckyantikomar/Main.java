@@ -4,13 +4,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import pl.barpad.duckyantikomar.animations.AnimationsManager;
 import pl.barpad.duckyantikomar.checks.ElytraCriticals;
 import pl.barpad.duckyantikomar.checks.FireworkHitDelay;
-import pl.barpad.duckyantikomar.main.DiscordHook;
-import pl.barpad.duckyantikomar.main.Reload;
-import pl.barpad.duckyantikomar.main.UpdateChecker;
-import pl.barpad.duckyantikomar.main.ViolationAlerts;
+import pl.barpad.duckyantikomar.main.*;
 import pl.barpad.duckyantikomar.metrics.MetricsLite;
+import pl.barpad.duckyantikomar.main.ConfigManager;
 
 public final class Main extends JavaPlugin {
+
+    private ConfigManager configManager;
 
     @Override
     public void onEnable() {
@@ -19,18 +19,22 @@ public final class Main extends JavaPlugin {
 
         int serviceId = 24978;
         new MetricsLite(this, serviceId);
+        this.configManager = new ConfigManager(this);
+        AnimationsManager animationsManager = new AnimationsManager(this, configManager);
+        DiscordHook discordHook = new DiscordHook(this, configManager);
+        ViolationAlerts violationAlerts = new ViolationAlerts(this, discordHook, animationsManager, configManager);
 
-        AnimationsManager animationsManager = new AnimationsManager(this);
-        DiscordHook discordHook = new DiscordHook(this);
-        ViolationAlerts violationAlerts = new ViolationAlerts(this, discordHook, animationsManager);
+        new FireworkHitDelay(this, getConfigManager(), violationAlerts, discordHook);
+        new ElytraCriticals(this, violationAlerts, discordHook, getConfigManager());
 
-        new FireworkHitDelay(this, violationAlerts, discordHook);
-        new ElytraCriticals(this, violationAlerts, discordHook);
-
-        new Reload(this);
+        new Reload(this, configManager, violationAlerts);
         new UpdateChecker(this).checkForUpdates();
 
         getLogger().info("DuckyAntiKomar has been successfully enabled!");
+    }
+
+    public ConfigManager getConfigManager() {
+        return configManager;
     }
 
     @Override
