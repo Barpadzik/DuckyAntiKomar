@@ -19,7 +19,7 @@ public class Reload extends AbstractCommand {
     private final ViolationAlerts violationAlerts;
 
     public Reload(Main plugin, ConfigManager configManager, ViolationAlerts violationAlerts) {
-        super("antikomar", "Plugin Reload", "/antikomar reload", "§f§l≫ §cUnknown Command");
+        super("duckyantikomar", "Plugin Reload", "/duckyantikomar reload", "§f§l≫ §cUnknown Command");
         this.plugin = plugin;
         this.configManager = configManager;
         this.violationAlerts = violationAlerts;
