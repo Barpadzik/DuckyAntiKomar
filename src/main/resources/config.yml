@@ -8,8 +8,8 @@ alert-timeout: 300
 # ===============================
 #           KomarA
 # ===============================
-KomarA-Enable: true # Should check be turned on?
-Max-Firework-Delay: 100 # Max-Firework-Delay specifies the maximum time (in milliseconds) that can elapse between using a firework while flying an elytra and hitting another player.
+KomarA-Enable: true # Should the check be turned on?
+Max-Firework-Delay: 200 # Max-Firework-Delay specifies the maximum time (in milliseconds) that can elapse between using a firework while flying an elytra and hitting another player.
 Max-KomarA-Alerts: 5 # Maximum number of demerits, after that the command below will be called
 KomarA-Command: "ban %player% AntiKomarSystem [KomarA]"
 KomarA-Animation-Enable: false # Should animation be turned on?
