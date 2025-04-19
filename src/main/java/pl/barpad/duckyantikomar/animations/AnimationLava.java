@@ -23,7 +23,7 @@ public class AnimationLava {
 
             @Override
             public void run() {
-                if (ticks >= 100 || !player.isOnline()) {
+                if (ticks >= 50 || !player.isOnline()) {
                     cancel();
                     return;
                 }
