@@ -51,14 +51,6 @@ public class ConfigManager {
         return config.getString("KomarA-Command", "ban %player% AntiKomarSystem [KomarA]");
     }
 
-    public boolean isKomarAAnimationEnabled() {
-        return config.getBoolean("KomarA-Animation-Enable", false);
-    }
-
-    public String getKomarAAnimationType() {
-        return config.getString("KomarA-Animation-Type", "NONE");
-    }
-
     public boolean isKomarADebugMode() {
         return config.getBoolean("KomarA-Debug-Mode", false);
     }
@@ -75,14 +67,6 @@ public class ConfigManager {
 
     public String getKomarBCommand() {
         return config.getString("KomarB-Command", "ban %player% AntiKomarSystem [KomarB]");
-    }
-
-    public boolean isKomarBAnimationEnabled() {
-        return config.getBoolean("KomarB-Animation-Enable", false);
-    }
-
-    public String getKomarBAnimationType() {
-        return config.getString("KomarB-Animation-Type", "NONE");
     }
 
     public boolean isKomarBDebugMode() {
@@ -109,14 +93,6 @@ public class ConfigManager {
 
     public String getKomarCCommand() {
         return config.getString("KomarC-Command", "ban %player% AntiKomarSystem [KomarC]");
-    }
-
-    public boolean isKomarCAnimationEnabled() {
-        return config.getBoolean("KomarC-Animation-Enable", false);
-    }
-
-    public String getKomarCAnimationType() {
-        return config.getString("KomarC-Animation-Type", "NONE");
     }
 
     public boolean isKomarCDebugMode() {

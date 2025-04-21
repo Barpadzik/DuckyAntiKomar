@@ -51,7 +51,7 @@ public class ViolationAlerts {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("antikomar.alerts")) {
-                player.sendMessage(message);
+                player.sendMessage(color(message));
             }
         }
     }
@@ -101,6 +101,10 @@ public class ViolationAlerts {
     public void clearAllViolations() {
         violations.clear();
         lastViolationTime.clear();
+    }
+
+    private String color(String message) {
+        return message == null ? "" : message.replace("&", "§");
     }
 
     private void removeOldViolations() {

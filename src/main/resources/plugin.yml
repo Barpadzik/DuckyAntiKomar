@@ -1,5 +1,5 @@
 name: DuckyAntiKomar
-version: '1.9.2'
+version: '1.9.3'
 main: pl.barpad.duckyantikomar.Main
 api-version: '1.16'
 authors: [ Barpad ]
