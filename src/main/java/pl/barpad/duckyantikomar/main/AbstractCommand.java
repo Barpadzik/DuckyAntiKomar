@@ -132,9 +132,9 @@ public abstract class AbstractCommand implements CommandExecutor, TabExecutor {
             return false;
         }
 
-        public List<String> tabComplete(CommandSender sender, String alais, String[] args) {
+        public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
             if (this.exe != null) {
-                return this.exe.onTabComplete(sender, this, alais, args);
+                return this.exe.onTabComplete(sender, this, alias, args);
             }
             return null;
         }
