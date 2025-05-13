@@ -109,12 +109,12 @@ permissions:
 <summary><strong>📁 Example: messages.yml</strong></summary>
 
 ```
-alert-message: '§6§lANTIKOMAR §8»§f Player §7»§f %player% §7»§6 %check% §7(§c%vl%VL§7)'
-no-permission: '§6§lANTIKOMAR §8» &cYou don''t have permission!'
-config-reloaded: '§6§lANTIKOMAR §8» &aConfiguration reloaded.'
-plugin-reloaded: '§6§lANTIKOMAR §8» &aPlugin successfully reloaded.'
-incorrect-usage: '§6§lANTIKOMAR §8» &cUsage: /antikomar reload'
-update-available: "§6§lANTIKOMAR §8» &eA new version is available: &c%version%"
-update-download: "§6§lANTIKOMAR §8» &eDownload: &a%url%"
-update-check-failed: "§6§lANTIKOMAR §8» &cCould not check for updates."
+alert-message: '&6&lANTIKOMAR &8»§f Player &7»&f %player% &7»&6 %check% &7(&c%vl%VL&7)'
+no-permission: '&6&lANTIKOMAR &8» &cYou don''t have permission!'
+config-reloaded: '&6&lANTIKOMAR &8» &aConfiguration reloaded.'
+plugin-reloaded: '&6&lANTIKOMAR &8» &aPlugin successfully reloaded.'
+incorrect-usage: '&6&lANTIKOMAR &8» &cUsage: /duckyantikomar reload'
+update-available: "&6&lANTIKOMAR &8» &eA new version is available: &c%version%"
+update-download: "&6&lANTIKOMAR &8» &eDownload: &a%url%"
+update-check-failed: "&6&lANTIKOMAR &8» &cCould not check for updates."
 ```
