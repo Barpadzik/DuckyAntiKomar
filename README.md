@@ -1,7 +1,3 @@
-> ⚠️ **Warning! Support for DuckyAntiKomar has ended.**  
-> Please **migrate to [DuckyAntiCheat](https://modrinth.com/plugin/duckyac) as soon as possible**, a more advanced and actively supported anti-cheat system.  
-> DuckyAntiKomar will no longer receive updates or fixes, and its detections may be unreliable in future Minecraft versions.
-
 # 🛡️ DuckyAntiKomar - Advanced Minecraft Anti-Cheat
 
 **DuckyAntiKomar** is a powerful anti-cheat plugin focused on detecting and preventing unfair Elytra-based exploits, including firework abuse, suspicious speed, and illegal critical hits.  
@@ -15,7 +11,7 @@ Compatible with **Minecraft 1.16.5 – 1.21+**.
 - Blocks attacks performed too soon after using fireworks during Elytra flight.
 - Customizable delay, punishment, and alert system.
 
-### 🚧 Elytra Speed Checks (`KomarB`) — *Canceled*
+### 🚧 Elytra Speed Checks (`KomarB`) — *Coming in 2.0*
 - Flags players flying faster than allowed based on pitch and velocity.
 - Prevents unnatural acceleration via exploit clients or firework spam.
 
@@ -44,7 +40,6 @@ All settings are fully customizable:
 - Translate all messages
 - Integrate with Discord
 
-<details>
 <summary><strong>📁 Example: config.yml</strong></summary>
 
 ```
@@ -58,8 +53,8 @@ alert-timeout: 300
 # ===============================
 #           KomarA
 # ===============================
-KomarA-Enable: true # Should the check be turned on?
-Max-Firework-Delay: 200 # Max-Firework-Delay specifies the maximum time (in milliseconds) that can elapse between using a firework while flying an elytra and hitting another player.
+KomarA-Enable: true # Should check be turned on?
+Max-Firework-Delay: 100 # Max-Firework-Delay specifies the maximum time (in milliseconds) that can elapse between using a firework while flying an elytra and hitting another player.
 Max-KomarA-Alerts: 5 # Maximum number of demerits, after that the command below will be called
 KomarA-Command: "ban %player% AntiKomarSystem [KomarA]"
 KomarA-Animation-Enable: false # Should animation be turned on?
@@ -101,19 +96,6 @@ discord:
   punishment-message-template: "**Punishment Executed**\nPlayer: **%player%**\nCommand: `%command%`"
 
 # ===============================
-#           Messages
-# ===============================
-
-alert-message: '&6&lANTIKOMAR &8»&f Player &7»&f %player% &7»&6 %check% &7(&c%vl%VL&7)'
-no-permission: '&6&lANTIKOMAR &8» &cYou don''t have permission!'
-config-reloaded: '&6&lANTIKOMAR &8» &aConfiguration reloaded.'
-plugin-reloaded: '&6&lANTIKOMAR &8» &aPlugin successfully reloaded.'
-incorrect-usage: '&6&lANTIKOMAR &8» &cUsage: /antikomar reload'
-update-available: "&6&lANTIKOMAR &8» &eA new version is available: &c%version%"
-update-download: "&6&lANTIKOMAR &8» &eDownload: &a%url%"
-update-check-failed: "&6&lANTIKOMAR &8» &cCould not check for updates."
-
-# ===============================
 #           Permissions
 # ===============================
 permissions:
@@ -123,4 +105,16 @@ permissions:
 # Please note that the permissions section is for information purposes only.
 # Changing this will not change the permissions in the plugin!
 ```
-</details>
+
+<summary><strong>📁 Example: messages.yml</strong></summary>
+
+```
+alert-message: '§6§lANTIKOMAR §8»§f Player §7»§f %player% §7»§6 %check% §7(§c%vl%VL§7)'
+no-permission: '§6§lANTIKOMAR §8» &cYou don''t have permission!'
+config-reloaded: '§6§lANTIKOMAR §8» &aConfiguration reloaded.'
+plugin-reloaded: '§6§lANTIKOMAR §8» &aPlugin successfully reloaded.'
+incorrect-usage: '§6§lANTIKOMAR §8» &cUsage: /antikomar reload'
+update-available: "§6§lANTIKOMAR §8» &eA new version is available: &c%version%"
+update-download: "§6§lANTIKOMAR §8» &eDownload: &a%url%"
+update-check-failed: "§6§lANTIKOMAR §8» &cCould not check for updates."
+```
