@@ -16,8 +16,6 @@ public class ViolationAlerts {
     private final AnimationsManager animationsManager;
     private final HashMap<String, Integer> violations = new HashMap<>();
     private final HashMap<String, Long> lastViolationTime = new HashMap<>();
-    private long alertTimeout;
-    private String alertMessage;
 
     private final ConfigManager configManager;
 
@@ -26,14 +24,7 @@ public class ViolationAlerts {
         this.discordHook = discordHook;
         this.animationsManager = animationsManager;
         this.configManager = configManager;
-
-        loadConfig();
         startCleanupTask();
-    }
-
-    private void loadConfig() {
-        alertTimeout = configManager.getAlertTimeoutSeconds() * 1000L;
-        alertMessage = configManager.getAlertMessage();
     }
 
     public void reportViolation(String playerName, String checkType) {
@@ -42,7 +33,7 @@ public class ViolationAlerts {
         violations.put(key, count);
         lastViolationTime.put(key, System.currentTimeMillis());
 
-        String message = alertMessage.replace("%player%", playerName)
+        String message = configManager.getAlertMessage().replace("%player%", playerName)
                 .replace("%check%", checkType)
                 .replace("%vl%", String.valueOf(count));
 
@@ -113,7 +104,7 @@ public class ViolationAlerts {
 
         while (iterator.hasNext()) {
             Map.Entry<String, Long> entry = iterator.next();
-            if (currentTime - entry.getValue() > alertTimeout) {
+            if (currentTime - entry.getValue() > configManager.getAlertTimeoutSeconds()) {
                 violations.remove(entry.getKey());
                 iterator.remove();
             }
