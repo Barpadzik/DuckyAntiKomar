@@ -33,7 +33,7 @@ public class ViolationAlerts {
 
     private void loadConfig() {
         alertTimeout = configManager.getAlertTimeoutSeconds() * 1000L;
-        alertMessage = configManager.getString("alert-message", "§6§lANTIKOMAR §8»§f Player §7»§f %player% §7»§6 %check% §7(§c%vl%VL§7)");
+        alertMessage = configManager.getAlertMessage();
     }
 
     public void reportViolation(String playerName, String checkType) {

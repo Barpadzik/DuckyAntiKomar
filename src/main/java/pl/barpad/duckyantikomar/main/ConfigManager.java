@@ -149,4 +149,38 @@ public class ConfigManager {
     public String getReloadPermission() {
         return config.getString("permissions.reload", "antikomar.reload");
     }
+
+    // === MESSAGES ===
+
+    public String getAlertMessage() {
+        return config.getString("alert-message", "&6&lANTIKOMAR &8»&f Player &7»&f %player% &7»&6 %check% &7(&c%vl%VL&7)");
+    }
+
+    public String getNoPermissionMessage() {
+        return config.getString("no-permission", "&6&lANTIKOMAR &8» &cYou don't have permission!");
+    }
+
+    public String getConfigReloadedMessage() {
+        return config.getString("config-reloaded", "&6&lANTIKOMAR &8» &aConfiguration reloaded.");
+    }
+
+    public String getPluginReloadedMessage() {
+        return config.getString("plugin-reloaded", "&6&lANTIKOMAR &8» &aPlugin successfully reloaded.");
+    }
+
+    public String getIncorrectUsageMessage() {
+        return config.getString("incorrect-usage", "&6&lANTIKOMAR &8» &cUsage: /antikomar reload");
+    }
+
+    public String getUpdateAvailableMessage() {
+        return config.getString("update-available", "&6&lANTIKOMAR &8» &eA new version is available: &c%version%");
+    }
+
+    public String getUpdateDownloadMessage() {
+        return config.getString("update-download", "&6&lANTIKOMAR &8» &eDownload: &a%url%");
+    }
+
+    public String getUpdateCheckFailedMessage() {
+        return config.getString("update-check-failed", "&6&lANTIKOMAR &8» &cCould not check for updates.");
+    }
 }
